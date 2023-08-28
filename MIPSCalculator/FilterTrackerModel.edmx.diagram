@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9777972dbb8c45d9b92394c70ccedec6" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="FilterTrackerModel.ApplicationLog" Width="1.5" PointX="4" PointY="0.5" />
+        <EntityTypeShape EntityType="FilterTrackerModel.ContactResultCode" Width="1.5" PointX="20.5" PointY="13.25" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Filter" Width="1.5" PointX="18.5" PointY="7.875" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Indication" Width="1.5" PointX="6" PointY="13.625" />
+        <EntityTypeShape EntityType="FilterTrackerModel.OrganizationFilter" Width="1.5" PointX="25.75" PointY="12.25" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Organization" Width="1.5" PointX="11" PointY="1.125" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Role" Width="1.5" PointX="16.25" PointY="19.625" />
+        <EntityTypeShape EntityType="FilterTrackerModel.State" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="FilterTrackerModel.UserRole" Width="1.5" PointX="28.375" PointY="17.5" />
+        <AssociationConnector Association="FilterTrackerModel.FK_ContactResultCodes_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Filters_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationFilters_Filters" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationFilters_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_UserRoles_Roles" />
+        <EntityTypeShape EntityType="FilterTrackerModel.ComplicatingFactor" Width="1.5" PointX="9.5" PointY="20.375" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Physician" Width="1.5" PointX="18.5" PointY="17.625" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Physicians_Organizations" />
+        <EntityTypeShape EntityType="FilterTrackerModel.TaskType" Width="1.5" PointX="8" PointY="15.25" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskTypes_Organizations" />
+        <EntityTypeShape EntityType="FilterTrackerModel.OrganizationDefault" Width="1.5" PointX="21.5" PointY="19.375" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationDefaults_Organizations" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PatientQuestion" Width="2.375" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PhysicianQuestion" Width="2.375" PointX="2.75" PointY="7.75" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientQuestions_Organizations" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PatientQuestionResponses" Width="1.5" PointX="31.5" PointY="12" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PhysicianQuestionResponses" Width="1.5" PointX="28.5" PointY="12" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientQuestionResponses_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientQuestionResponses_Organizations1" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianQuestionResponses_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianQuestionResponses_PhysicianQuestions" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientQuestionResponses_PatientQuestions" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PatientFilter" Width="2" PointX="22.625" PointY="9" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_ComplicatingFactors" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_Filters" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_Indications" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_Organization" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_OrderingPhysician" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_PrimaryCarePhysician" />
+        <EntityTypeShape EntityType="FilterTrackerModel.ContactType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Attachment" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PatientContactAttempt" Width="2.25" PointX="25.375" PointY="6.875" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_ContactResultCodes" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_ContactTypes" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_PatientFilters" />
+        <EntityTypeShape EntityType="FilterTrackerModel.TaskAttachment" Width="1.5" PointX="30.875" PointY="16.625" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskAttachments_Attachments" />
+        <EntityTypeShape EntityType="FilterTrackerModel.PhysicianContactAttempt" Width="1.5" PointX="28.875" PointY="6.125" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_ContactResultCodes" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_ContactTypes" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_PatientFilters" />
+        <EntityTypeShape EntityType="FilterTrackerModel.User" Width="1.5" PointX="13.25" PointY="8.75" />
+        <AssociationConnector Association="FilterTrackerModel.FK_ComplicatingFactors_CreateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_ComplicatingFactors_UpdateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_ContactResultCodes_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_ContactResultCodes_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Filters_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Filters_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Indications_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Indications_Users1" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationDefaults_CreateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationDefaults_UpdateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationFilters_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_OrganizationFilters_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Organizations_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Organizations_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Users_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_ProcedurePhysicians" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Physicians_CreateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Physicians_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskAttachments_CreateUsers" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskAttachments_UpdateUsers" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskTypes_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskTypes_Users1" />
+        <AssociationConnector Association="FilterTrackerModel.FK_UserRoles_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_UserRoles_Users_CREATE" />
+        <AssociationConnector Association="FilterTrackerModel.FK_UserRoles_Users_Update" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Users_Users_Create" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Users_Users_Update" />
+        <EntityTypeShape EntityType="FilterTrackerModel.LoginHistory" Width="1.5" PointX="4.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FilterTrackerModel.MIPSHistory" Width="1.5" PointX="6.375" PointY="3.75" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Task" Width="1.5" PointX="31.375" PointY="5" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientContactAttempts_Tasks" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_PatientFilters" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientQuestionResponses_Tasks" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianContactAttempts_Tasks" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PhysicianQuestionResponses_Tasks" />
+        <AssociationConnector Association="FilterTrackerModel.FK_TaskAttachment_Task" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_TaskTypes" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_Users" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_Users_CreateUser" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_Users_UpdateUser" />
+        <EntityTypeShape EntityType="FilterTrackerModel.Patient" Width="1.5" PointX="15.375" PointY="1.75" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Patients_Organizations" />
+        <AssociationConnector Association="FilterTrackerModel.FK_PatientFilters_Patient" />
+        <AssociationConnector Association="FilterTrackerModel.FK_Tasks_Patients" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

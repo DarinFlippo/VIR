@@ -1,0 +1,491 @@
+﻿@model FilterTracker.Models.PatientFilterEditorModel
+
+@{
+	ViewBag.Title = "Create Patient Filter";
+}
+<br/>
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+	<div class="col-xs-3 col-md-3 col-lg-3 margin-bottom-20">
+		@Html.ActionLink("Back to Patient", "PatientDetails", new { Id = Model.PatientId }, new { @class = "pull-left" })
+	</div>
+</div>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(m => m.PatientId)
+	@Html.HiddenFor(m => m.OrganizationId)
+
+	@*<div class="row">*@
+	<div class="card text-white bg-dark">
+		<div class="card-body">
+			<div class="container">
+				<div class="row row-cols-4">
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Name</span>
+							<span class="text-white text-left">@Model.Patient.FullName</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">MRN</span>
+							<span class="text-white text-left">@Model.Patient.MRN</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Birthdate</span>
+							<span class="text-white text-left">@Model.Patient.DateOfBirth.ToShortDateString()</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Gender</span>
+							@if (Model.Patient.Gender.HasValue)
+							{
+								if (Model.Patient.Gender.Value == 1)
+								{
+									<span class="text-white text-left">Male</span>
+								}
+								else
+								{
+									<span class="text-white text-left">Female</span>
+								}
+							}
+						</div>
+					</div>
+				</div>
+				<div class="row row-cols-2">
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Primary Phone Number</span>
+							<span class="text-white text-left">@Model.Patient.PrimaryPhoneNumber</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Primary Email</span>
+							<span class="text-white text-left">@Model.Patient.PrimaryEmailAddress</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@*</div>*@
+
+	<div class="row" style="padding-top: 30px;">
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			@Html.LabelFor(m => m.ProcedureDate, new { style = "margin-right: 10px;" })
+			@Html.TextBoxFor(m => m.ProcedureDate, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.ProcedureDate, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<label for="TargetRemovalDate">Target Removal Date</label>
+			@Html.TextBoxFor(m => m.TargetRemovalDate, new { @class = "form-control-disabled margin-bottom-5", @readonly = "readonly", disabled="disabled" })
+			@*<span>@Html.ValidationMessageFor(m => m.TargetRemovalDate, "", new { @class = "text-danger", @readonly="readonly" })</span>*@
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<label for="Name">Actual Removal Date</label>
+			@Html.TextBoxFor(m => m.ActualRemovalDate, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.ActualRemovalDate, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 30px;">
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			@Html.LabelFor(m => m.IsTemporary)
+			@Html.CheckBoxFor(m => m.IsTemporary, new { @style = "width: 15px; height: 15px; margin-left: 10px;" })
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			@Html.LabelFor(m => m.MadePermanent)
+			@Html.TextBoxFor(m => m.MadePermanent, new { @class = "form-control-disabled margin-bottom-5", @readonly = "readonly", disabled = "disabled" })
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			@Html.LabelFor(m => m.MadePermanentBy)
+			@Html.TextBoxFor(m => m.MadePermanentBy, new { @class = "form-control-disabled margin-bottom-5", @readonly = "readonly", disabled = "disabled" })
+		</div>
+	</div>
+	<div class="row" style="padding-top: 30px;">
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<div>
+				@Html.LabelFor(m => m.SelectedPrimaryCarePhysicianId, new { style = "margin-right: 10px;" })
+				<a href="#" style="font-size: 0.9em" id="AddPCP" onclick="$('#new-pcp-dialog').modal('show');">Add</a>
+			</div>
+			@Html.DropDownListFor(m => m.SelectedPrimaryCarePhysicianId, Model.Physicians, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedPrimaryCarePhysicianId, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			@Html.LabelFor(m => m.SelectedProcedurePhysicianId, new { style = "margin-right: 10px;" })
+			@Html.DropDownListFor(m => m.SelectedProcedurePhysicianId, Model.ClinicPhysicians, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedProcedurePhysicianId, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<label for="SelectedOrderingPhysicianId" style="margin-right: 10px;">Ordering Physician</label>
+			@Html.DropDownListFor(m => m.SelectedOrderingPhysicianId, Model.Physicians, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedOrderingPhysicianId, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 30px;">
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<label for="SelectedIndicationId" style="margin-right: 10px;">Indications</label>
+			@Html.DropDownListFor(m => m.SelectedIndicationId, Model.Indications, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedIndicationId, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<div>
+				@Html.LabelFor(m => m.SelectedComplicatingFactorId)
+				<a href="#" style="font-size: 0.9em; margin-left: 10px;" id="Add" onclick="$('#new-compfact-dialog').modal('show');">Add</a>
+			</div>
+			@Html.DropDownListFor(m => m.SelectedComplicatingFactorId, Model.ComplicatingFactors, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedComplicatingFactorId, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col-sm-4 col-md-4 col-lg-4">
+			<div>
+				<label for="SelectedFilterId" style="margin-right: 10px;">Filter</label>
+				<a href="#" style="font-size: 0.9em" id="AddFilter" onclick="$('#new-filter-dialog').modal('show');">Add</a>
+			</div>
+			@Html.DropDownListFor(m => m.SelectedFilterId, Model.Filters, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedFilterId, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 30px;">
+		<div class="form-group col-sm-12 col-md-12 col-lg-12">
+			<label for="Notes" style="margin-right: 10px;">Notes</label>
+			@Html.TextAreaFor(m => m.Notes, new { @class = "form-control margin-bottom-5", rows = "6", cols = "600" })
+			<span>@Html.ValidationMessageFor(m => m.Notes, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-1 pull-left">
+			<input type="submit" class="btn btn-primary" value="Save" />
+		</div>
+	</div>
+
+
+	<div id="new-filter-dialog" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>New Filter</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-3 pull-right">Name</div>
+							<div class="col-6"><input type="text" id="filter-name" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row pt-2">
+							<div class="col-3 pull-right">Manufacturer</div>
+							<div class="col-6"><input type="text" id="filter-manufacturer" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row pt-2">
+							<div class="col-3 pull-right">Permanent</div>
+							<div class="col-6"><input type="checkbox" id="filter-permanent" name="IsPermanent" class="pull-left" style="width: 16px; height: 16px; padding-top: 8px;" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="add-filter" type="button" class="btn btn-primary btn-sm pull-right" data-dismiss="modal" onclick="SaveFilter();">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="new-compfact-dialog" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>New Complicating Factor</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-3 pull-right">Name</div>
+							<div class="col-6"><input type="text" id="cf-name" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row pt-2">
+							<div class="col-3 pull-right">Description</div>
+							<div class="col-6"><input type="text" id="cf-desc" value="" class="pull-left form-control width-full" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="add-cf" type="button" class="btn btn-primary btn-sm pull-right" data-dismiss="modal" onclick="SaveComplicatingFactor();">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="new-pcp-dialog" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4>New Primary Care Provider</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-3 pull-right">Name</div>
+							<div class="col-6"><input type="text" id="pcp-name" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row pt-2">
+							<div class="col-3 pull-right">Email</div>
+							<div class="col-6"><input type="text" id="pcp-email" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row pt-2">
+							<div class="col-3 pull-right">Phone</div>
+							<div class="col-6"><input type="text" id="pcp-phone" value="" class="pull-left form-control width-full" /></div>
+						</div>
+						<div class="row mt-2">
+							<div class="col-7 pull-right">Requires Approval Prior to Removal</div>
+							<div class="col-1"><input type="checkbox" id="pcp-requires-approval" class="pull-left mt-1" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="add-pcp" type="button" class="btn btn-primary btn-sm pull-right" data-dismiss="modal" onclick="SavePCP();">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@section scripts{
+	<script>
+		function SaveFilter() {
+			var n = $("#filter-name").val();
+			var m = $("#filter-manufacturer").val();
+			var p = $("#filter-permanent").val();
+
+			if (p != null && p.length > 0) {
+				if (p == 'on' || p == 'On' || p == 'ON')
+					p = "true";
+			}
+
+			var msg = '';
+
+			if (n == null || n.length == 0) {
+				msg = "A name is required.";
+			}
+
+			if (m == null || m.length == 0) {
+				if (msg.length == 0)
+					msg = "A manufacturer is required.";
+				else
+					msg += "\r\n" + "A manufacturer is required.";
+			}
+
+			if (msg.length > 0) {
+				alert(msg);
+				return;
+			}
+
+			try {
+				var form = $('#__AjaxAntiForgeryForm');
+				var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+				$.ajax({
+					url: "/Home/AddFilter",
+					cache: false,
+					method: "POST",
+					dataType: "json",
+					async: false,
+					data: {
+						__RequestVerificationToken: token,
+						Name: n,
+						Manufacturer: m,
+						IsPermanent: p
+					},
+					success: function (opts) {
+						if (opts != null) {
+							var opt = "";
+							var target = $("#SelectedFilterId");
+							target.empty();
+							for (var i = 0; i < opts.length; i++) {
+								if (opts[i].Selected == "true") {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								} else {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								}
+								target.append(opt);
+							}
+						} else {
+							$('.modal').modal('hide');
+						}
+					},
+					error: function (xhr, error, status) {
+						if (xhr.responseText != null && xhr.responseText.length > 0)
+							alert(xhr.responseText);
+						else
+							alert(error + "::" + status);
+					}
+				});
+			}
+			catch (e) {
+				alert(e);
+			}
+		}
+
+		function SaveComplicatingFactor() {
+			var n = $("#cf-name").val();
+			var d = $("#cf-desc").val();
+
+			if (n == null || n.length == 0) {
+				alert("A name is required.");
+				return;
+			}
+
+			try {
+				var form = $('#__AjaxAntiForgeryForm');
+				var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+				$.ajax({
+					url: "/Home/AddComplicatingFactor",
+					cache: false,
+					method: "POST",
+					dataType: "json",
+					async: false,
+					data: {
+						__RequestVerificationToken: token,
+						Name: n,
+						Description: d
+					},
+					success: function (opts) {
+						if (opts != null) {
+							var opt = "";
+							var target = $("#SelectedComplicatingFactorId");
+							target.empty();
+							for (var i = 0; i < opts.length; i++) {
+								if (opts[i].Selected == "true") {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								} else {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								}
+								target.append(opt);
+							}
+						} else {
+							$('.modal').modal('hide');
+						}
+					},
+					error: function (xhr, error, status) {
+						if (xhr.responseText != null && xhr.responseText.length > 0)
+							alert(xhr.responseText);
+						else
+							alert(error + "::" + status);
+					}
+				});
+			}
+			catch (e) {
+				alert(e);
+			}
+		}
+
+		function SavePCP() {
+			var n = $("#pcp-name").val();
+			var e = $("#pcp-email").val();
+			var p = $("#pcp-phone").val();
+			var ra = $("#pcp-requires-approval").prop("checked");
+
+			if (n == null || n.length == 0) {
+				alert("A name is required.");
+				return;
+			}
+
+
+			try {
+				var form = $('#__AjaxAntiForgeryForm');
+				var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+				$.ajax({
+					url: "/Home/AddPCP",
+					cache: false,
+					method: "POST",
+					dataType: "json",
+					async: false,
+					data: {
+						__RequestVerificationToken: token,
+						Name: n,
+						Email: e,
+						Phone: p,
+						RequiresApproval: ra
+					},
+					success: function (opts) {
+						if (opts != null) {
+							var opt = "";
+							var target = $("#SelectedPrimaryCarePhysicianId");
+							target.empty();
+							for (var i = 0; i < opts.length; i++) {
+								if (opts[i].Selected == "true") {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								} else {
+									opt = "<option value='" + opts[i].Value + "' selected>" + opts[i].Text + "</option>";
+								}
+								target.append(opt);
+							}
+						} else {
+							$('.modal').modal('hide');
+							alert("Failed to add Primary Care Provider.");
+						}
+					},
+					error: function (xhr, error, status) {
+						if (xhr.responseText != null && xhr.responseText.length > 0)
+							alert(xhr.responseText);
+						else
+							alert(error + "::" + status);
+					}
+				});
+			}
+			catch (e) {
+				alert(e);
+			}
+		}
+	</script>
+}
+
+@section css{
+	<style>
+		.label {
+			color: black !important
+		}
+
+		.pad-top-10 {
+			padding-top: 10px;
+		}
+
+		.pad-top-20 {
+			padding-top: 20px;
+		}
+
+		.pad-left-10 {
+			padding-left: 10px;
+		}
+
+		.pad-right-10 {
+			padding-right: 10px;
+		}
+
+		.pad-all-10 {
+			padding: 10px 10px 10px 10px;
+		}
+
+		.content-panel {
+			min-height: 300px;
+			max-height: 600px;
+			margin-top: 5px;
+		}
+	</style>
+}

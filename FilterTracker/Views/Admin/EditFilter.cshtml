@@ -1,0 +1,60 @@
+﻿@model FilterTracker.Models.FilterEditorModel
+@{
+    ViewBag.Title = "Edit Filter";
+}
+    <br />
+<div class="container">
+    <h2>Edit Filter</h2>
+    <hr />
+
+    <div class="margin-bottom-20">
+        @Html.ActionLink("Back to List", "FilterList")
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.OrganizationId);
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label for="Name">Name</label>
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control margin-bottom-5" })
+            <span>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</span>
+        </div>
+
+        <div class="form-group">
+            <label for="Manufacturer">Manufacturer</label>
+            @Html.TextBoxFor(model => model.Manufacturer, new { @class = "form-control margin-bottom-5" })
+            <span>@Html.ValidationMessageFor(model => model.Manufacturer, "", new { @class = "text-danger" })</span>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-1 col-lg-1">
+                <label for="Active">Active</label>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+                @Html.CheckBoxFor(model => model.Active, new { @class = "form-control-checkbox margin-bottom-5" })
+            </div>
+        </div>
+
+        <div class="row margin-bottom-20">
+            <div class="col-sm-2 col-md-1 col-lg-1">
+                <label for="Permanent">Permanent</label>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+                @Html.CheckBoxFor(model => model.Permanent, new { @class = "form-control-checkbox margin-bottom-5" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1 col-md-1 col-lg-1">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+
+
+    }
+</div>

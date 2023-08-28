@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FilterTrackerModelStoreContainer" CdmEntityContainer="FilterTrackerEntities">
+    <EntitySetMapping Name="ApplicationLogs">
+      <EntityTypeMapping TypeName="FilterTrackerModel.ApplicationLog">
+        <MappingFragment StoreEntitySet="ApplicationLog">
+          <ScalarProperty Name="Exception" ColumnName="Exception" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Logger" ColumnName="Logger" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Thread" ColumnName="Thread" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactResultCodes">
+      <EntityTypeMapping TypeName="FilterTrackerModel.ContactResultCode">
+        <MappingFragment StoreEntitySet="ContactResultCodes">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filters">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Filter">
+        <MappingFragment StoreEntitySet="Filters">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Permanent" ColumnName="Permanent" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indications">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Indication">
+        <MappingFragment StoreEntitySet="Indications">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationFilters">
+      <EntityTypeMapping TypeName="FilterTrackerModel.OrganizationFilter">
+        <MappingFragment StoreEntitySet="OrganizationFilters">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Index" ColumnName="Index" />
+          <ScalarProperty Name="FiterId" ColumnName="FiterId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Organizations">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Organization">
+        <MappingFragment StoreEntitySet="Organizations">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="MaxUsers" ColumnName="MaxUsers" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="FilterTrackerModel.State">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abbreviation" ColumnName="Abbreviation" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="FilterTrackerModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComplicatingFactors">
+      <EntityTypeMapping TypeName="FilterTrackerModel.ComplicatingFactor">
+        <MappingFragment StoreEntitySet="ComplicatingFactors">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Physicians">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Physician">
+        <MappingFragment StoreEntitySet="Physicians">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskTypes">
+      <EntityTypeMapping TypeName="FilterTrackerModel.TaskType">
+        <MappingFragment StoreEntitySet="TaskTypes">
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationDefaults">
+      <EntityTypeMapping TypeName="FilterTrackerModel.OrganizationDefault">
+        <MappingFragment StoreEntitySet="OrganizationDefaults">
+          <ScalarProperty Name="PatientContactDays" ColumnName="PatientContactDays" />
+          <ScalarProperty Name="ContactAttemptsBeforeRegisteredLetter" ColumnName="ContactAttemptsBeforeRegisteredLetter" />
+          <ScalarProperty Name="ReassessDays" ColumnName="ReassessDays" />
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="FilterAge" ColumnName="FilterAge" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientQuestions">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PatientQuestion">
+        <MappingFragment StoreEntitySet="PatientQuestions">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="DisplayOrderIndex" ColumnName="DisplayOrderIndex" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhysicianQuestions">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PhysicianQuestion">
+        <MappingFragment StoreEntitySet="PhysicianQuestions">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="DisplayOrderIndex" ColumnName="DisplayOrderIndex" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientQuestionResponses">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PatientQuestionResponses">
+        <MappingFragment StoreEntitySet="PatientQuestionResponses">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhysicianQuestionResponses">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PhysicianQuestionResponses">
+        <MappingFragment StoreEntitySet="PhysicianQuestionResponses">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientFilters">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PatientFilter">
+        <MappingFragment StoreEntitySet="PatientFilters">
+          <ScalarProperty Name="IsTemporary" ColumnName="IsTemporary" />
+          <ScalarProperty Name="MadePermanentBy" ColumnName="MadePermanentBy" />
+          <ScalarProperty Name="MadePermanent" ColumnName="MadePermanent" />
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="ProcedurePhysicianId" ColumnName="ProcedurePhysicianId" />
+          <ScalarProperty Name="PrimaryCarePhysicianId" ColumnName="PrimaryCarePhysicianId" />
+          <ScalarProperty Name="OrderingPhysicianId" ColumnName="OrderingPhysicianId" />
+          <ScalarProperty Name="ReassessmentDate" ColumnName="ReassessmentDate" />
+          <ScalarProperty Name="ActualRemovalDate" ColumnName="ActualRemovalDate" />
+          <ScalarProperty Name="TargetRemovalDate" ColumnName="TargetRemovalDate" />
+          <ScalarProperty Name="ProcedureDate" ColumnName="ProcedureDate" />
+          <ScalarProperty Name="ComplicatingFactorId" ColumnName="ComplicatingFactorId" />
+          <ScalarProperty Name="IndicationId" ColumnName="IndicationId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="FilterId" ColumnName="FilterId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactTypes">
+      <EntityTypeMapping TypeName="FilterTrackerModel.ContactType">
+        <MappingFragment StoreEntitySet="ContactTypes">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Attachments">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Attachment">
+        <MappingFragment StoreEntitySet="Attachments">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileData" ColumnName="FileData" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientContactAttempts">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PatientContactAttempt">
+        <MappingFragment StoreEntitySet="PatientContactAttempts">
+          <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+          <ScalarProperty Name="RelatedTaskId" ColumnName="RelatedTaskId" />
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="ContactResultCodeId" ColumnName="ContactResultCodeId" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+          <ScalarProperty Name="PatientFilterId" ColumnName="PatientFilterId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskAttachments">
+      <EntityTypeMapping TypeName="FilterTrackerModel.TaskAttachment">
+        <MappingFragment StoreEntitySet="TaskAttachments">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhysicianContactAttempts">
+      <EntityTypeMapping TypeName="FilterTrackerModel.PhysicianContactAttempt">
+        <MappingFragment StoreEntitySet="PhysicianContactAttempts">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="RelatedTaskId" ColumnName="RelatedTaskId" />
+          <ScalarProperty Name="ContactResultCodeId" ColumnName="ContactResultCodeId" />
+          <ScalarProperty Name="ContactTypeId" ColumnName="ContactTypeId" />
+          <ScalarProperty Name="PatientFilterId" ColumnName="PatientFilterId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FilterTrackerModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="LastSuccessfulLogin" ColumnName="LastSuccessfulLogin" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginHistories">
+      <EntityTypeMapping TypeName="FilterTrackerModel.LoginHistory">
+        <MappingFragment StoreEntitySet="LoginHistory">
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIPSHistories">
+      <EntityTypeMapping TypeName="FilterTrackerModel.MIPSHistory">
+        <MappingFragment StoreEntitySet="MIPSHistory">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="MIPS" ColumnName="MIPS" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="TargetCloseDate" ColumnName="TargetCloseDate" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="AssignedUserId" ColumnName="AssignedUserId" />
+          <ScalarProperty Name="PatientFilterId" ColumnName="PatientFilterId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="TaskTypeId" ColumnName="TaskTypeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="FilterTrackerModel.Patient">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="UpdateUserId" ColumnName="UpdateUserId" />
+          <ScalarProperty Name="UpdateTimestamp" ColumnName="UpdateTimestamp" />
+          <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+          <ScalarProperty Name="CreateTimestamp" ColumnName="CreateTimestamp" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="SecondaryEmailAddress" ColumnName="SecondaryEmailAddress" />
+          <ScalarProperty Name="PrimaryEmailAddress" ColumnName="PrimaryEmailAddress" />
+          <ScalarProperty Name="SecondaryPhoneNumber" ColumnName="SecondaryPhoneNumber" />
+          <ScalarProperty Name="PrimaryPhoneNumber" ColumnName="PrimaryPhoneNumber" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MRN" ColumnName="MRN" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

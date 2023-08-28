@@ -1,0 +1,264 @@
+﻿@model FilterTracker.Controllers.PatientReconciliationReportModel
+
+@{
+	ViewBag.Title = "Patient Reconciliation Report";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="text-center">
+	<h3>@ViewBag.Title</h3>
+</div>
+<br />
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-3 text-left">
+			<h5>Task Group</h5>
+		</div>
+		<div class="col-2 text-center">
+			<h5>Count</h5>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-3 text-left">
+			Total Cases
+		</div>
+		<div class="col-2 text-center">
+			@Model.TotalPatientFilters
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5">
+			<hr />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5" style="font-weight: bold; font-size: larger;">
+			Patients not on Dashboard
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Filters made permanent
+		</div>
+		<div class="col-2 text-center">
+			@Model.FilterMadePermanentCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Deceased
+		</div>
+		<div class="col-2 text-center">
+			@Model.DeceasedCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Sent Registered letter (Closed)
+		</div>
+		<div class="col-2 text-center">
+			@Model.SendRegisteredLetterClosedTaskCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Filters Removed
+		</div>
+		<div class="col-2 text-center">
+			@Model.FiltersRemovedCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Build case (pending)
+		</div>
+		<div class="col-2 text-center">
+			@Model.BuildCasePendingCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Schedule Retrieval (pending)
+		</div>
+		<div class="col-2 text-center">
+			@Model.ScheduleRetrievalPendingCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5">
+			<hr style="color: white; background-color: white;" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Sub Total Not on Dashboard:
+		</div>
+		<div class="col-2 text-center">
+			@{
+				int sum = Model.FilterMadePermanentCount
+				+ Model.SendRegisteredLetterClosedTaskCount
+				+ Model.FiltersRemovedCount
+				+ Model.BuildCasePendingCount
+				+ Model.ScheduleRetrievalPendingCount
+				+ Model.DeceasedCount;
+			}
+			@sum
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-5">
+			<hr />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5" style="font-weight: bold; font-size: larger;">
+			Patients on Dashboard
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Build case
+		</div>
+		<div class="col-2 text-center">
+			@Model.BuildCaseOpenCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Send Registered Letter
+		</div>
+		<div class="col-2 text-center">
+			@Model.SendRegisteredLetterOpenTaskCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Review case
+		</div>
+		<div class="col-2 text-center">
+			@Model.ReviewCaseOpenCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Contact PCP
+		</div>
+		<div class="col-2 text-center">
+			@Model.ContactPCPOpenCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Schedule retrieval / clinic
+		</div>
+		<div class="col-2 text-center">
+			@Model.ScheduleRetrievalOpenCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Retrieval date passed
+		</div>
+		<div class="col-2 text-center">
+			@Model.RetrievalDatePassedTaskCount
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-5">
+			<hr style="color: white; background-color: white;" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Sub Total On Dashboard:
+		</div>
+		<div class="col-2 text-center">
+			@{
+				int sum2 = Model.BuildCaseOpenCount
+				+ Model.SendRegisteredLetterOpenTaskCount
+				+ Model.ReviewCaseOpenCount
+				+ Model.ContactPCPOpenCount
+				+ Model.ScheduleRetrievalOpenCount
+				+ Model.RetrievalDatePassedTaskCount;
+			}
+			@sum2
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-1">&nbsp;</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Patients to research:
+		</div>
+		<div class="col-2 text-center">
+			@Model.GhostCount
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5">
+			<hr style="color: white; background-color: white;" />
+			<hr style="color: white; background-color: white;" />
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 text-left">
+			Total (On and Off Dashboard):
+		</div>
+		<div class="col-2 text-center">
+			@{int sum3 = sum + sum2; }
+			@sum + @sum2 = @sum3
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-5">
+			<hr style="color: white; background-color: white;" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-3" style="font-weight: 400; font-size: medium;">Patients to research</div>
+		<div class="col-2" style="font-weight: 400; font-size: medium;">Patient MRN</div>
+	</div>
+
+	@foreach (FilterTracker.Models.Patient item in Model.Ghosts)
+	{
+		<div class="row">
+			<div class="col-3 text-left">
+				<a href="/Home/PatientDetails/@item.Id">@item.FirstName &nbsp; @item.LastName</a>
+			</div>
+			<div class="col-2 text-center">
+				@item.MRN
+			</div>
+		</div>
+	}
+
+	@*<br />
+		<br />
+
+		<div class="row">
+			<div class="col-3 text-left"><h5>Recon description</h5></div>
+			<div class="col-2 text-center"><h5>Counts</h5></div>
+		</div>
+
+		<div class="row">
+			<div class="col-3 text-left">All active patient records in database</div>
+			<div class="col-2 text-center">@Model.ActivePatientCount</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-3 text-left">Patients to research</div>
+			<div class="col-2 text-center">@Model.PatientsToResearch</div>
+		</div>*@
+</div>
+

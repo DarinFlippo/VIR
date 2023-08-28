@@ -1,0 +1,72 @@
+﻿@model FilterTracker.Models.ActiveCasesModel
+@*
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="active-cases-container">
+                    <div class="fa fa-drivers-license fa-3x" style="color: white; position: relative; top: -50px; left: 128px; z-index:999"></div>
+                    <p class="heading text-center">74</p>
+                    <p class="sub-heading text-center">Active Cases</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contacts-pending-container">
+                    <div class="fa fa-bullseye fa-3x" style="color: white; position: relative; top: -50px; left: 128px; z-index:999"></div>
+                    <p class="heading text-center">15</p>
+                    <p class="sub-heading text-center">Contacts Pending</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="retreival-rates-container">
+                    <div class="fa fa-tachometer fa-3x" style="color: white; position: relative; top: -50px; left: 128px; z-index:999"></div>
+                    <div class="heading text-center" style="margin-bottom: 55px;">Retreival Rates</div>
+                    <div class="sub-rate-1 text-center">Since Inception: (79%)</div>
+                    <div class="sub-rate-2 text-center">Last 24 Months: (81%)</div>
+                    <div class="sub-rate-3 text-center">This Year: (84%)</div>
+                </div>
+            </div>
+        </div>
+
+<div class="col-md-12 table-container">*@
+<table class="table">
+    <tr>
+        <th>MRN</th>
+        <th>Name</th>
+        <th>Birthdate</th>
+        <th>Gender</th>
+        <th>Primary Email</th>
+        <th>Primary Phone</th>
+        <th></th>
+    </tr>
+
+    @foreach (FilterTracker.Models.Patient item in Model.Patients)
+    {
+<tr>
+	<td>@item.MRN</td>
+	<td><span class="patient-name">@item.FirstName&nbsp;@item.LastName</span></td>
+	<td><span class="patient-birthdate">@item.DateOfBirth.ToShortDateString()</span></td>
+	@if (item.Gender.HasValue)
+	{
+		if (item.Gender.Value == 1)
+		{
+            <td>Male</td>
+		}
+		else
+		{
+        <td>Female</td>
+		}
+	}
+	else
+	{
+		<td>&nbsp;</td>
+	}
+	<td>@item.Gender</td>
+	<td>@item.PrimaryEmailAddress</td>
+	<td>@item.PrimaryPhoneNumber</td>
+	<td>@Html.ActionLink("Edit", "EditPatient", new { id = item.Id })&nbsp;|&nbsp;@Html.ActionLink("View Details", "PatientDetails", new { id = item.Id })</td>
+</tr>
+    }
+
+</table>
+@*</div>*@
+@*</div>*@

@@ -1,0 +1,137 @@
+﻿@model FilterTracker.Models.ContactPCPTaskEditorViewModel
+<div class="container">
+	<div class="row">
+		<div class="col-12 card text-white bg-dark" style="width: 100%; font-size: 0.9em;">
+			<div class="card-body container">
+				<div class="row" style="line-height: 1.0em;">
+					<div class="col-6">
+						<span class="text-white-50 text-right">Name:</span>
+						<span class="text-white text-left ml-2">@Model.Patient.FullName</span>
+					</div>
+					<div class="col-6">
+						<span class="text-white-50 text-right">MRN:</span>
+						<span class="text-white text-left ml-2">@Model.Patient.MRN</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<span class="text-white-50 text-right">Birthdate:</span>
+						<span class="text-white text-left ml-2">@Model.Patient.DateOfBirth.ToShortDateString()</span>
+					</div>
+					<div class="col-6">
+						<span class="text-white-50 text-right">Gender:</span>
+						@if (Model.Patient.Gender.HasValue)
+						{
+							if (Model.Patient.Gender.Value == 1)
+							{
+								<span class="text-white text-left ml-2">Male</span>
+							}
+							else
+							{
+								<span class="text-white text-left ml-2">Female</span>
+							}
+						}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						<span class="text-white-50 text-right">Primary Phone Number:</span>
+						<span class="text-white text-left ml-2">@Model.Patient.PrimaryPhoneNumber</span>
+					</div>
+					<div class="col-6">
+						<span class="text-white-50 text-right">Primary Email:</span>
+						<span class="text-white text-left ml-2">@Model.Patient.PrimaryEmailAddress</span>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-5 text-white-50 text-left">Filter Information</div>
+				</div>
+				<div class="row">
+					<div class="col-6 text-white text-left ml-3">
+						<span class="text-white">Model:</span>
+						<span class="text-white-50 ml-2">
+							@if (Model.PatientFilter.Filter != null)
+							{
+								@Model.PatientFilter.Filter.Name
+							}
+						</span>
+					</div>
+				</div>
+				@*<div class="row">
+			<div class="col-6 text-white text-left ml-3">
+				<span>Location:</span>
+				<span class="text-white-50 ml-2">@Model.PatientFilter.Location</span>
+			</div>
+		</div>*@
+				<div class="row">
+					<div class="col-6 text-white text-left ml-3">
+						<span>Insertion Date:</span>
+						<span class="text-white-50 ml-2">@Model.PatientFilter.ProcedureDate.Value.ToShortDateString()</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6 text-white text-left ml-3">
+						@if (Model.PatientFilter.TargetRemovalDate.HasValue)
+						{
+							<span>Target Removal Date:</span><span class="text-white-50 ml-2">@Model.PatientFilter.TargetRemovalDate.Value.ToShortDateString()</span>
+						}
+						else
+						{
+							<span>Target Removal Date:</span><span class="text-white-50 ml-2">&nbsp;</span>
+						}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6 text-white text-left ml-3">
+						<span class="text-white-50">@Html.ActionLink("Case History", "DisplayCaseHistory", new { patientFilterId = Model.PatientFilter.Id }, new { target = "_blank" })</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row mt-2">
+		<div class="col-12 ">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Contact Reason</h5>
+					<p class="card-text">@Model.ContactReason</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-6 mt-3">
+			@Html.LabelFor(c => c.PCPApproved)
+			@Html.CheckBoxFor(c => c.PCPApproved, new { @class = "ml-3" })
+		</div>
+	</div>
+	
+
+	<div class="row row-cols-2" style="padding-top: 30px;">
+		@Html.AntiForgeryToken()
+		<div class="form-group col">
+			<label for="contact-type">Contact Method</label>
+			@Html.DropDownListFor(m => m.SelectedContactType, Model.ContactAttemptTypes, new { @class = "form-control margin-bottom-5", id = "contact-type" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedContactType, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group col">
+			<label for="result-code">Contact Result</label>
+			@Html.DropDownListFor(m => m.SelectedResultCode, Model.ResultCodeTypes, new { @class = "form-control margin-bottom-5", id = "result-code" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedResultCode, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+	<div class="row row-cols-12" style="padding-top: 15px;">
+		<div class="form-group col">
+			<label for="contact-note">Notes</label>
+			@Html.TextAreaFor(m => m.ContactNote, new { @class = "form-control margin-bottom-5", id = "contact-note", rows = "6", style = "width: 100%; margin: 0px auto;" })
+			<span>@Html.ValidationMessageFor(m => m.ContactNote, "", new { @class = "text-danger" })</span>
+		</div>
+	</div>
+
+
+</div>

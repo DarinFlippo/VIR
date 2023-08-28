@@ -1,0 +1,73 @@
+﻿@model FilterTracker.Models.PhysicianEditorModel
+@{
+    ViewBag.Title = "Edit Physician";
+}
+    <br /><br/>
+<h2>@ViewBag.Title</h2>
+<hr />
+<p>
+    @Html.ActionLink("Back to list", "PhysicianList")
+</p>
+<div class="container">
+	<form method="post" action="/Admin/EditPhysician" id="frm-create-physician">
+		@Html.AntiForgeryToken()
+		@Html.HiddenFor(m => m.Id)
+		@Html.HiddenFor(m => m.OrganizationId)
+
+		<div class="row">
+			<div class="col-md-4">
+				@Html.LabelFor(m => m.Name)
+				@Html.TextBoxFor(m => m.Name, new { @class = "form-control margin-bottom-10" })
+				<span>@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				@Html.LabelFor(m => m.Email)
+				@Html.TextBoxFor(m => m.Email, new { @class = "form-control margin-bottom-10" })
+				<span>@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				@Html.LabelFor(m => m.Phone)
+				@Html.TextBoxFor(m => m.Phone, new { @class = "form-control margin-bottom-10" })
+				<span>@Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				@Html.LabelFor(m => m.Fax)
+				@Html.TextBoxFor(m => m.Fax, new { @class = "form-control margin-bottom-5" })
+				<span>@Html.ValidationMessageFor(m => m.Fax, "", new { @class = "text-danger" })</span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4" style="height: 32px;">
+				@Html.LabelFor(m => m.Active)
+				@Html.CheckBoxFor(m => m.Active, new { style="margin-left: 5px; margin-top: 5px; width: 18px; height: 18px;" })
+			</div>
+		</div>
+
+		<div class="row mt-2">
+			<div class="col-md-6">
+				@Html.LabelFor(m => m.RequiresRemovalApproval)
+				@Html.CheckBoxFor(m => m.RequiresRemovalApproval, new { style = "margin-left: 5px; margin-top: 5px; width: 18px; height: 18px;" })
+				<span>@Html.ValidationMessageFor(m => m.RequiresRemovalApproval, "", new { @class = "text-danger" })</span>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-2 col-md-2 col-lg-1 pull-left">
+				<button class="btn btn-primary" id="btn-submit" type="submit">Save</button>
+			</div>
+		</div>
+	</form>
+</div>
+

@@ -1,0 +1,143 @@
+﻿@model FilterTracker.Controllers.ImportPatientDataModel
+
+@{
+	ViewBag.Title = "Import Patient Data";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="containeer">
+	<div class="row" style="margin-top: 60px;">
+		<div class="col-10">
+			<h3>@ViewBag.Title</h3>
+			<hr />
+		</div>
+	</div>
+
+	@using (Html.BeginForm("ImportPatientData", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+
+		if (!Model.ImportAttemptComplete)
+		{
+			<div class="row" style="margin-bottom: 40px;">
+				<div class="col-10">
+					<h4>Instructions:  </h4>
+					<ul>
+						<li>
+							Input files must be in a .csv.
+						</li>
+						<li>
+							If you are unsure of the file format, please contact technical support for the file requirements.
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			if (Model.AmSuperUser)
+			{
+			<div class="row" style="margin-bottom: 25px;">
+				<div class="col-2">
+					<span class="label">Organization</span>
+				</div>
+				<div class="col-5">
+					@Html.DropDownListFor(m => m.SelectedOrganizationId, Model.Organizations, new {@class="form-control"})
+				</div>
+				<div class="col-5">
+					@Html.ValidationMessageFor(model => model.SelectedOrganizationId, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			}
+
+			<div class="row">
+				<input type="file" id="uploaded" name="uploaded" accept="xls" required />
+			</div>
+
+			<div class="row mt-4">
+				<div class="col-1">
+					<input type="submit" class="btn btn-primary" value="Import" />
+				</div>
+				<div class="col-1">
+					<input type="button" class="btn btn-secondary" value="Cancel" onclick="document.location='/Home/Dashboard';" />
+				</div>
+			</div>
+		}
+		else
+		{
+			if (Model.Errors.Count() > 0)
+			{
+				<div class="row">
+					<div class="col-12">
+						<div class="card bg-warning">
+							<div class="card-header">
+								Error:
+							</div>
+							<div class="card-body">
+								<ul>
+									@foreach (string s in Model.Errors)
+									{
+									<li>@s</li>
+									}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h4>Import Results</h4>
+						</div>
+						<div class="card-body">
+							<div class="containeer">
+								<div class="row">
+									<div class="col-4">
+										<span class="label">Total data rows in file:</span>
+									</div>
+									<div class="col-1">
+										<span class="report-field">@Model.DataRowCount</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-4 label">Patients Imported:</div>
+									<div class="col-1 report-field">@Model.PatientsSuccessfullyImported</div>
+								</div>
+								<div class="row">
+									<div class="col-4 label">Patients Filters Imported:</div>
+									<div class="col-1 report-field">@Model.PatientFiltersSuccessfullyImported</div>
+								</div>
+								<div class="row">
+									<div class="col-4 label">Patients already in system:</div>
+									<div class="col-1 report-field">@Model.DuplicatePatients</div>
+								</div>
+								<div class="row">
+									<div class="col-4 label">Patient filters already in system:</div>
+									<div class="col-1 report-field">@Model.DuplicateFiltersSkipped</div>
+								</div>
+								@if (Model.ImportFailures.Count() > 0)
+								{
+									<div class="row mt-2" style="border-top: 2px solid gray;">
+										<div class="col-10">
+											<h4>Rows failing to import:</h4>
+											@foreach (string item in Model.ImportFailures)
+											{
+											<p><pre>@item</pre></p>
+											}
+										</div>
+									</div>
+								}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="sol-sm-1 col-md-1 col-lg-1">
+					<input type="button" class="btn btn-primary" value="Exit" onclick="document.location='/Home/Dashboard';" />
+				</div>
+			</div>
+		}
+	}
+</div>
+

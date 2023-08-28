@@ -1,0 +1,58 @@
+﻿@model FilterTracker.Models.FilterListModel
+@{
+    ViewBag.Title = "Filter List";
+}
+
+<br/>
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<p>
+    @Html.ActionLink("Create New", "CreateFilter") | @Html.ActionLink("Admin Home", "Index")
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Manufacturer
+        </th>
+        <th>
+            Active
+        </th>
+        <th>
+            Permanent
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.FilterList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Permanent)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditFilter", new { id = item.Id })
+                @if (User.IsInRole("SuperUsers"))
+                {
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete", "DeleteFilter", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

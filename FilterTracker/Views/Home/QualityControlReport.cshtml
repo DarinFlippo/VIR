@@ -1,0 +1,93 @@
+﻿@model FilterTracker.Models.QualityControlReportModel
+@{
+	ViewBag.Title = "Quality Control Report";
+}
+
+
+<br />
+<br />
+<h3>@ViewBag.Title</h3>
+<hr />
+
+	<div class="spinner-grow text-success" id="loading-spinner" style="width: 100%; height: 100%; z-index: 0" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+	<br />
+	<table class="table table-striped" style="visibility: hidden;" id="patient-list">
+		<thead>
+			<tr>
+				<th>MRN</th>
+				<th>Name</th>
+				<th>Placement Date</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (FilterTracker.Models.PatientFilter item in Model.AbnormalPatientFilters)
+			{
+				<tr>
+					<td>@item.Patient.MRN</td>
+					<td>
+						<span class="patient-name">
+						@Html.ActionLink(@item.Patient.FirstName + " " + @item.Patient.LastName, 
+							"EditPatient", 
+							new { id = item.Id }
+						)
+						</span>
+					</td>
+					<td>
+						@if (item.ProcedureDate.HasValue)
+						{
+							@Html.Raw(item.ProcedureDate.Value.ToShortDateString())
+						}
+						else
+						{
+							@Html.Raw("&nbsp;")
+						}
+					</td>
+					<td>@Html.ActionLink("Case History","DisplayCaseHistory", new { patientFilterId = item.Id })</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+
+@section css{
+	<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+}
+
+@section  scripts{
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/dataTables.buttons.min.js"></script>
+	<script src="~/Scripts/buttons.flash.min.js"></script>
+	<script src="~/Scripts/jszip.min.js"></script>
+	<script src="~/Scripts/pdfmake.min.js"></script>
+	<script src="~/Scripts/vfs_fonts.js"></script>
+	<script src="~/Scripts/buttons.html5.min.js"></script>
+	<script src="~/Scripts/buttons.print.min.js"></script>
+	<script src="~/Scripts/dataTables.1.10.21.bootstrap4.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$("#loading-spinner").show('fast');
+
+			var table = $('#patient-list').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+			var info = table.page.info();
+			if (info.pages <= 1) {
+				$("#patient-list_paginate").hide('fast');
+			}
+			$("#loading-spinner").hide('fast');
+			$("#patient-list").css("visibility", "visible");
+
+		});
+	</script>
+}

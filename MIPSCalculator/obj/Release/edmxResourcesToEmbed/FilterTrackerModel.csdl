@@ -1,0 +1,1764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FilterTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FilterTrackerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ApplicationLogs" EntityType="FilterTrackerModel.ApplicationLog" />
+    <EntitySet Name="ContactResultCodes" EntityType="FilterTrackerModel.ContactResultCode" />
+    <EntitySet Name="Filters" EntityType="FilterTrackerModel.Filter" />
+    <EntitySet Name="Indications" EntityType="FilterTrackerModel.Indication" />
+    <EntitySet Name="OrganizationFilters" EntityType="FilterTrackerModel.OrganizationFilter" />
+    <EntitySet Name="Organizations" EntityType="FilterTrackerModel.Organization" />
+    <EntitySet Name="Roles" EntityType="FilterTrackerModel.Role" />
+    <EntitySet Name="States" EntityType="FilterTrackerModel.State" />
+    <EntitySet Name="UserRoles" EntityType="FilterTrackerModel.UserRole" />
+    <AssociationSet Name="FK_ContactResultCodes_Organizations" Association="FilterTrackerModel.FK_ContactResultCodes_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="ContactResultCode" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Organizations" Association="FilterTrackerModel.FK_Filters_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Filter" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Filters" Association="FilterTrackerModel.FK_OrganizationFilters_Filters">
+      <End Role="Filter" EntitySet="Filters" />
+      <End Role="OrganizationFilter" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Organizations" Association="FilterTrackerModel.FK_OrganizationFilters_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="OrganizationFilter" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Roles" Association="FilterTrackerModel.FK_UserRoles_Roles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="ComplicatingFactors" EntityType="FilterTrackerModel.ComplicatingFactor" />
+    <EntitySet Name="Physicians" EntityType="FilterTrackerModel.Physician" />
+    <AssociationSet Name="FK_Physicians_Organizations" Association="FilterTrackerModel.FK_Physicians_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Physician" EntitySet="Physicians" />
+    </AssociationSet>
+    <EntitySet Name="TaskTypes" EntityType="FilterTrackerModel.TaskType" />
+    <AssociationSet Name="FK_TaskTypes_Organizations" Association="FilterTrackerModel.FK_TaskTypes_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="TaskType" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <EntitySet Name="OrganizationDefaults" EntityType="FilterTrackerModel.OrganizationDefault" />
+    <AssociationSet Name="FK_OrganizationDefaults_Organizations" Association="FilterTrackerModel.FK_OrganizationDefaults_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="OrganizationDefault" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <EntitySet Name="PatientQuestions" EntityType="FilterTrackerModel.PatientQuestion" />
+    <EntitySet Name="PhysicianQuestions" EntityType="FilterTrackerModel.PhysicianQuestion" />
+    <AssociationSet Name="FK_PatientQuestions_Organizations" Association="FilterTrackerModel.FK_PatientQuestions_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PatientQuestion" EntitySet="PatientQuestions" />
+    </AssociationSet>
+    <EntitySet Name="PatientQuestionResponses" EntityType="FilterTrackerModel.PatientQuestionResponses" />
+    <EntitySet Name="PhysicianQuestionResponses" EntityType="FilterTrackerModel.PhysicianQuestionResponses" />
+    <AssociationSet Name="FK_PatientQuestionResponses_Organizations" Association="FilterTrackerModel.FK_PatientQuestionResponses_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_Organizations1" Association="FilterTrackerModel.FK_PatientQuestionResponses_Organizations1">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_Organizations" Association="FilterTrackerModel.FK_PhysicianQuestionResponses_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_PhysicianQuestions" Association="FilterTrackerModel.FK_PhysicianQuestionResponses_PhysicianQuestions">
+      <End Role="PhysicianQuestion" EntitySet="PhysicianQuestions" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_PatientQuestions" Association="FilterTrackerModel.FK_PatientQuestionResponses_PatientQuestions">
+      <End Role="PatientQuestion" EntitySet="PatientQuestions" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <EntitySet Name="PatientFilters" EntityType="FilterTrackerModel.PatientFilter" />
+    <AssociationSet Name="FK_PatientFilters_ComplicatingFactors" Association="FilterTrackerModel.FK_PatientFilters_ComplicatingFactors">
+      <End Role="ComplicatingFactor" EntitySet="ComplicatingFactors" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Filters" Association="FilterTrackerModel.FK_PatientFilters_Filters">
+      <End Role="Filter" EntitySet="Filters" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Indications" Association="FilterTrackerModel.FK_PatientFilters_Indications">
+      <End Role="Indication" EntitySet="Indications" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Organization" Association="FilterTrackerModel.FK_PatientFilters_Organization">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_OrderingPhysician" Association="FilterTrackerModel.FK_PatientFilters_OrderingPhysician">
+      <End Role="Physician" EntitySet="Physicians" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_PrimaryCarePhysician" Association="FilterTrackerModel.FK_PatientFilters_PrimaryCarePhysician">
+      <End Role="Physician" EntitySet="Physicians" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <EntitySet Name="ContactTypes" EntityType="FilterTrackerModel.ContactType" />
+    <EntitySet Name="Attachments" EntityType="FilterTrackerModel.Attachment" />
+    <EntitySet Name="PatientContactAttempts" EntityType="FilterTrackerModel.PatientContactAttempt" />
+    <AssociationSet Name="FK_PatientContactAttempts_ContactResultCodes" Association="FilterTrackerModel.FK_PatientContactAttempts_ContactResultCodes">
+      <End Role="ContactResultCode" EntitySet="ContactResultCodes" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_ContactTypes" Association="FilterTrackerModel.FK_PatientContactAttempts_ContactTypes">
+      <End Role="ContactType" EntitySet="ContactTypes" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Organizations" Association="FilterTrackerModel.FK_PatientContactAttempts_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_PatientFilters" Association="FilterTrackerModel.FK_PatientContactAttempts_PatientFilters">
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <EntitySet Name="TaskAttachments" EntityType="FilterTrackerModel.TaskAttachment" />
+    <AssociationSet Name="FK_TaskAttachments_Attachments" Association="FilterTrackerModel.FK_TaskAttachments_Attachments">
+      <End Role="Attachment" EntitySet="Attachments" />
+      <End Role="TaskAttachment" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <EntitySet Name="PhysicianContactAttempts" EntityType="FilterTrackerModel.PhysicianContactAttempt" />
+    <AssociationSet Name="FK_PhysicianContactAttempts_ContactResultCodes" Association="FilterTrackerModel.FK_PhysicianContactAttempts_ContactResultCodes">
+      <End Role="ContactResultCode" EntitySet="ContactResultCodes" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_ContactTypes" Association="FilterTrackerModel.FK_PhysicianContactAttempts_ContactTypes">
+      <End Role="ContactType" EntitySet="ContactTypes" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Organizations" Association="FilterTrackerModel.FK_PhysicianContactAttempts_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_PatientFilters" Association="FilterTrackerModel.FK_PhysicianContactAttempts_PatientFilters">
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="FilterTrackerModel.User" />
+    <AssociationSet Name="FK_ComplicatingFactors_CreateUser" Association="FilterTrackerModel.FK_ComplicatingFactors_CreateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ComplicatingFactor" EntitySet="ComplicatingFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplicatingFactors_UpdateUser" Association="FilterTrackerModel.FK_ComplicatingFactors_UpdateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ComplicatingFactor" EntitySet="ComplicatingFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactResultCodes_Users_Create" Association="FilterTrackerModel.FK_ContactResultCodes_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ContactResultCode" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactResultCodes_Users_Update" Association="FilterTrackerModel.FK_ContactResultCodes_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ContactResultCode" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Users_Create" Association="FilterTrackerModel.FK_Filters_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Filter" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Users_Update" Association="FilterTrackerModel.FK_Filters_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Filter" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Indications_Users" Association="FilterTrackerModel.FK_Indications_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Indication" EntitySet="Indications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Indications_Users1" Association="FilterTrackerModel.FK_Indications_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Indication" EntitySet="Indications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationDefaults_CreateUser" Association="FilterTrackerModel.FK_OrganizationDefaults_CreateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrganizationDefault" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationDefaults_UpdateUser" Association="FilterTrackerModel.FK_OrganizationDefaults_UpdateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrganizationDefault" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Users" Association="FilterTrackerModel.FK_OrganizationFilters_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrganizationFilter" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Users_Create" Association="FilterTrackerModel.FK_OrganizationFilters_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrganizationFilter" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organizations_Users_Create" Association="FilterTrackerModel.FK_Organizations_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organizations_Users_Update" Association="FilterTrackerModel.FK_Organizations_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Organization" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Organizations" Association="FilterTrackerModel.FK_Users_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Users_Create" Association="FilterTrackerModel.FK_PatientContactAttempts_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Users_Update" Association="FilterTrackerModel.FK_PatientContactAttempts_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_ProcedurePhysicians" Association="FilterTrackerModel.FK_PatientFilters_ProcedurePhysicians">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Users_Create" Association="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Users_Update" Association="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Physicians_CreateUser" Association="FilterTrackerModel.FK_Physicians_CreateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Physician" EntitySet="Physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Physicians_Users" Association="FilterTrackerModel.FK_Physicians_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Physician" EntitySet="Physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachments_CreateUsers" Association="FilterTrackerModel.FK_TaskAttachments_CreateUsers">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TaskAttachment" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachments_UpdateUsers" Association="FilterTrackerModel.FK_TaskAttachments_UpdateUsers">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TaskAttachment" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypes_Users" Association="FilterTrackerModel.FK_TaskTypes_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TaskType" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypes_Users1" Association="FilterTrackerModel.FK_TaskTypes_Users1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TaskType" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users" Association="FilterTrackerModel.FK_UserRoles_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users_CREATE" Association="FilterTrackerModel.FK_UserRoles_Users_CREATE">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users_Update" Association="FilterTrackerModel.FK_UserRoles_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Users_Create" Association="FilterTrackerModel.FK_Users_Users_Create">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Users_Update" Association="FilterTrackerModel.FK_Users_Users_Update">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="LoginHistories" EntityType="FilterTrackerModel.LoginHistory" />
+    <EntitySet Name="MIPSHistories" EntityType="FilterTrackerModel.MIPSHistory" />
+    <EntitySet Name="Tasks" EntityType="FilterTrackerModel.Task" />
+    <AssociationSet Name="FK_Tasks_Organizations" Association="FilterTrackerModel.FK_Tasks_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Tasks" Association="FilterTrackerModel.FK_PatientContactAttempts_Tasks">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="PatientContactAttempt" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_PatientFilters" Association="FilterTrackerModel.FK_Tasks_PatientFilters">
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_Tasks" Association="FilterTrackerModel.FK_PatientQuestionResponses_Tasks">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Tasks" Association="FilterTrackerModel.FK_PhysicianContactAttempts_Tasks">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="PhysicianContactAttempt" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_Tasks" Association="FilterTrackerModel.FK_PhysicianQuestionResponses_Tasks">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachment_Task" Association="FilterTrackerModel.FK_TaskAttachment_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="TaskAttachment" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_TaskTypes" Association="FilterTrackerModel.FK_Tasks_TaskTypes">
+      <End Role="TaskType" EntitySet="TaskTypes" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users" Association="FilterTrackerModel.FK_Tasks_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users_CreateUser" Association="FilterTrackerModel.FK_Tasks_Users_CreateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users_UpdateUser" Association="FilterTrackerModel.FK_Tasks_Users_UpdateUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <EntitySet Name="Patients" EntityType="FilterTrackerModel.Patient" />
+    <AssociationSet Name="FK_Patients_Organizations" Association="FilterTrackerModel.FK_Patients_Organizations">
+      <End Role="Organization" EntitySet="Organizations" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Patient" Association="FilterTrackerModel.FK_PatientFilters_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientFilter" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Patients" Association="FilterTrackerModel.FK_Tasks_Patients">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ApplicationLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Thread" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Level" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Exception" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ContactResultCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="ResultCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_ContactResultCodes_Organizations" FromRole="ContactResultCode" ToRole="Organization" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_ContactResultCodes" FromRole="ContactResultCode" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_ContactResultCodes" FromRole="ContactResultCode" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_ContactResultCodes_Users_Create" FromRole="ContactResultCode" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_ContactResultCodes_Users_Update" FromRole="ContactResultCode" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Filter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Manufacturer" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="Permanent" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_Filters_Organizations" FromRole="Filter" ToRole="Organization" />
+    <NavigationProperty Name="OrganizationFilters" Relationship="FilterTrackerModel.FK_OrganizationFilters_Filters" FromRole="Filter" ToRole="OrganizationFilter" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_Filters" FromRole="Filter" ToRole="PatientFilter" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_Filters_Users_Create" FromRole="Filter" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_Filters_Users_Update" FromRole="Filter" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Indication">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_Indications" FromRole="Indication" ToRole="PatientFilter" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_Indications_Users" FromRole="Indication" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_Indications_Users1" FromRole="Indication" ToRole="User" />
+  </EntityType>
+  <EntityType Name="OrganizationFilter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="FiterId" Type="Int32" Nullable="false" />
+    <Property Name="Index" Type="Int32" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Filter" Relationship="FilterTrackerModel.FK_OrganizationFilters_Filters" FromRole="OrganizationFilter" ToRole="Filter" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_OrganizationFilters_Organizations" FromRole="OrganizationFilter" ToRole="Organization" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_OrganizationFilters_Users" FromRole="OrganizationFilter" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_OrganizationFilters_Users_Create" FromRole="OrganizationFilter" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="MaxUsers" Type="Int32" Nullable="false" />
+    <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Zipcode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPhone" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ContactResultCodes" Relationship="FilterTrackerModel.FK_ContactResultCodes_Organizations" FromRole="Organization" ToRole="ContactResultCode" />
+    <NavigationProperty Name="Filters" Relationship="FilterTrackerModel.FK_Filters_Organizations" FromRole="Organization" ToRole="Filter" />
+    <NavigationProperty Name="OrganizationFilters" Relationship="FilterTrackerModel.FK_OrganizationFilters_Organizations" FromRole="Organization" ToRole="OrganizationFilter" />
+    <NavigationProperty Name="Physicians" Relationship="FilterTrackerModel.FK_Physicians_Organizations" FromRole="Organization" ToRole="Physician" />
+    <NavigationProperty Name="TaskTypes" Relationship="FilterTrackerModel.FK_TaskTypes_Organizations" FromRole="Organization" ToRole="TaskType" />
+    <NavigationProperty Name="OrganizationDefaults" Relationship="FilterTrackerModel.FK_OrganizationDefaults_Organizations" FromRole="Organization" ToRole="OrganizationDefault" />
+    <NavigationProperty Name="PatientQuestions" Relationship="FilterTrackerModel.FK_PatientQuestions_Organizations" FromRole="Organization" ToRole="PatientQuestion" />
+    <NavigationProperty Name="PatientQuestionResponses" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_Organizations" FromRole="Organization" ToRole="PatientQuestionResponses" />
+    <NavigationProperty Name="PatientQuestionResponses1" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_Organizations1" FromRole="Organization" ToRole="PatientQuestionResponses" />
+    <NavigationProperty Name="PhysicianQuestionResponses" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_Organizations" FromRole="Organization" ToRole="PhysicianQuestionResponses" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_Organization" FromRole="Organization" ToRole="PatientFilter" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Organizations" FromRole="Organization" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Organizations" FromRole="Organization" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_Organizations_Users_Create" FromRole="Organization" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_Organizations_Users_Update" FromRole="Organization" ToRole="User" />
+    <NavigationProperty Name="Users" Relationship="FilterTrackerModel.FK_Users_Organizations" FromRole="Organization" ToRole="User" />
+    <NavigationProperty Name="Tasks" Relationship="FilterTrackerModel.FK_Tasks_Organizations" FromRole="Organization" ToRole="Task" />
+    <NavigationProperty Name="Patients" Relationship="FilterTrackerModel.FK_Patients_Organizations" FromRole="Organization" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserRoles" Relationship="FilterTrackerModel.FK_UserRoles_Roles" FromRole="Role" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Abbreviation" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="FilterTrackerModel.FK_UserRoles_Roles" FromRole="UserRole" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_UserRoles_Users" FromRole="UserRole" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_UserRoles_Users_CREATE" FromRole="UserRole" ToRole="User" />
+    <NavigationProperty Name="User2" Relationship="FilterTrackerModel.FK_UserRoles_Users_Update" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_ContactResultCodes_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.ContactResultCode" Role="ContactResultCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCode">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Filter" Role="Filter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filter">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Filters">
+    <End Type="FilterTrackerModel.Filter" Role="Filter" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationFilter" Role="OrganizationFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilter">
+        <PropertyRef Name="FiterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationFilter" Role="OrganizationFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilter">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Roles">
+    <End Type="FilterTrackerModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="FilterTrackerModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ComplicatingFactor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_ComplicatingFactors" FromRole="ComplicatingFactor" ToRole="PatientFilter" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_ComplicatingFactors_CreateUser" FromRole="ComplicatingFactor" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_ComplicatingFactors_UpdateUser" FromRole="ComplicatingFactor" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Physician">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_Physicians_Organizations" FromRole="Physician" ToRole="Organization" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_OrderingPhysician" FromRole="Physician" ToRole="PatientFilter" />
+    <NavigationProperty Name="PatientFilters1" Relationship="FilterTrackerModel.FK_PatientFilters_PrimaryCarePhysician" FromRole="Physician" ToRole="PatientFilter" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_Physicians_CreateUser" FromRole="Physician" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_Physicians_Users" FromRole="Physician" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Physicians_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Physician" Role="Physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physician">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TaskType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_TaskTypes_Organizations" FromRole="TaskType" ToRole="Organization" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_TaskTypes_Users" FromRole="TaskType" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_TaskTypes_Users1" FromRole="TaskType" ToRole="User" />
+    <NavigationProperty Name="Tasks" Relationship="FilterTrackerModel.FK_Tasks_TaskTypes" FromRole="TaskType" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_TaskTypes_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskType" Role="TaskType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskType">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrganizationDefault">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="FilterAge" Type="Int32" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_OrganizationDefaults_Organizations" FromRole="OrganizationDefault" ToRole="Organization" />
+    <Property Name="ReassessDays" Type="Int32" />
+    <Property Name="ContactAttemptsBeforeRegisteredLetter" Type="Int32" />
+    <Property Name="PatientContactDays" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_OrganizationDefaults_CreateUser" FromRole="OrganizationDefault" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_OrganizationDefaults_UpdateUser" FromRole="OrganizationDefault" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_OrganizationDefaults_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationDefault" Role="OrganizationDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefault">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="DisplayOrderIndex" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_PatientQuestions_Organizations" FromRole="PatientQuestion" ToRole="Organization" />
+    <NavigationProperty Name="PatientQuestionResponses" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_PatientQuestions" FromRole="PatientQuestion" ToRole="PatientQuestionResponses" />
+  </EntityType>
+  <EntityType Name="PhysicianQuestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="DisplayOrderIndex" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PhysicianQuestionResponses" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_PhysicianQuestions" FromRole="PhysicianQuestion" ToRole="PhysicianQuestionResponses" />
+  </EntityType>
+  <Association Name="FK_PatientQuestions_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientQuestion" Role="PatientQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestion">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientQuestionResponses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="Response" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organizations" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_Organizations" FromRole="PatientQuestionResponses" ToRole="Organization" />
+    <NavigationProperty Name="PatientQuestions" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_PatientQuestions" FromRole="PatientQuestionResponses" ToRole="PatientQuestion" />
+    <NavigationProperty Name="Task" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_Tasks" FromRole="PatientQuestionResponses" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="PhysicianQuestionResponses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="Response" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organizations" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_Organizations" FromRole="PhysicianQuestionResponses" ToRole="Organization" />
+    <NavigationProperty Name="PhysicianQuestions" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_PhysicianQuestions" FromRole="PhysicianQuestionResponses" ToRole="PhysicianQuestion" />
+    <NavigationProperty Name="Task" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_Tasks" FromRole="PhysicianQuestionResponses" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_PatientQuestionResponses_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientQuestionResponses" Role="PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_Organizations1">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientQuestionResponses" Role="PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianQuestionResponses" Role="PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_PhysicianQuestions">
+    <End Type="FilterTrackerModel.PhysicianQuestion" Role="PhysicianQuestion" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianQuestionResponses" Role="PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhysicianQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_PatientQuestions">
+    <End Type="FilterTrackerModel.PatientQuestion" Role="PatientQuestion" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientQuestionResponses" Role="PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientQuestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PatientFilter">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="FilterId" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IndicationId" Type="Int32" />
+    <Property Name="ComplicatingFactorId" Type="Int32" />
+    <Property Name="ProcedureDate" Type="DateTime" Precision="0" />
+    <Property Name="TargetRemovalDate" Type="DateTime" Precision="0" />
+    <Property Name="ActualRemovalDate" Type="DateTime" Precision="0" />
+    <Property Name="ReassessmentDate" Type="DateTime" Precision="0" />
+    <Property Name="OrderingPhysicianId" Type="Int32" />
+    <Property Name="PrimaryCarePhysicianId" Type="Int32" />
+    <Property Name="ProcedurePhysicianId" Type="Int32" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ComplicatingFactor" Relationship="FilterTrackerModel.FK_PatientFilters_ComplicatingFactors" FromRole="PatientFilter" ToRole="ComplicatingFactor" />
+    <NavigationProperty Name="Filter" Relationship="FilterTrackerModel.FK_PatientFilters_Filters" FromRole="PatientFilter" ToRole="Filter" />
+    <NavigationProperty Name="Indication" Relationship="FilterTrackerModel.FK_PatientFilters_Indications" FromRole="PatientFilter" ToRole="Indication" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_PatientFilters_Organization" FromRole="PatientFilter" ToRole="Organization" />
+    <NavigationProperty Name="OrderingPhysician" Relationship="FilterTrackerModel.FK_PatientFilters_OrderingPhysician" FromRole="PatientFilter" ToRole="Physician" />
+    <NavigationProperty Name="PrimaryCarePhysician" Relationship="FilterTrackerModel.FK_PatientFilters_PrimaryCarePhysician" FromRole="PatientFilter" ToRole="Physician" />
+    <Property Name="MadePermanent" Type="DateTime" Precision="0" />
+    <Property Name="MadePermanentBy" Type="Int32" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_PatientFilters" FromRole="PatientFilter" ToRole="PatientContactAttempt" />
+    <Property Name="IsTemporary" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_PatientFilters" FromRole="PatientFilter" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="ProcedurePhysician" Relationship="FilterTrackerModel.FK_PatientFilters_ProcedurePhysicians" FromRole="PatientFilter" ToRole="User" />
+    <NavigationProperty Name="Tasks" Relationship="FilterTrackerModel.FK_Tasks_PatientFilters" FromRole="PatientFilter" ToRole="Task" />
+    <NavigationProperty Name="Patient" Relationship="FilterTrackerModel.FK_PatientFilters_Patient" FromRole="PatientFilter" ToRole="Patient" />
+  </EntityType>
+  <Association Name="FK_PatientFilters_ComplicatingFactors">
+    <End Type="FilterTrackerModel.ComplicatingFactor" Role="ComplicatingFactor" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ComplicatingFactor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="ComplicatingFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Filters">
+    <End Type="FilterTrackerModel.Filter" Role="Filter" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="FilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Indications">
+    <End Type="FilterTrackerModel.Indication" Role="Indication" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Indication">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="IndicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Organization">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_OrderingPhysician">
+    <End Type="FilterTrackerModel.Physician" Role="Physician" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Physician">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="OrderingPhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_PrimaryCarePhysician">
+    <End Type="FilterTrackerModel.Physician" Role="Physician" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Physician">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="PrimaryCarePhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ContactType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_ContactTypes" FromRole="ContactType" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_ContactTypes" FromRole="ContactType" ToRole="PhysicianContactAttempt" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TaskAttachments" Relationship="FilterTrackerModel.FK_TaskAttachments_Attachments" FromRole="Attachment" ToRole="TaskAttachment" />
+  </EntityType>
+  <EntityType Name="PatientContactAttempt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="PatientFilterId" Type="Int32" Nullable="false" />
+    <Property Name="ContactTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ContactResultCodeId" Type="Int32" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ContactResultCode" Relationship="FilterTrackerModel.FK_PatientContactAttempts_ContactResultCodes" FromRole="PatientContactAttempt" ToRole="ContactResultCode" />
+    <NavigationProperty Name="ContactType" Relationship="FilterTrackerModel.FK_PatientContactAttempts_ContactTypes" FromRole="PatientContactAttempt" ToRole="ContactType" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Organizations" FromRole="PatientContactAttempt" ToRole="Organization" />
+    <NavigationProperty Name="PatientFilter" Relationship="FilterTrackerModel.FK_PatientContactAttempts_PatientFilters" FromRole="PatientContactAttempt" ToRole="PatientFilter" />
+    <Property Name="RelatedTaskId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Users_Create" FromRole="PatientContactAttempt" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Users_Update" FromRole="PatientContactAttempt" ToRole="User" />
+    <Property Name="TrackingNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Task" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Tasks" FromRole="PatientContactAttempt" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_PatientContactAttempts_ContactResultCodes">
+    <End Type="FilterTrackerModel.ContactResultCode" Role="ContactResultCode" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactResultCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="ContactResultCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_ContactTypes">
+    <End Type="FilterTrackerModel.ContactType" Role="ContactType" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_PatientFilters">
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TaskAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="AttachmentId" Type="Int32" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Attachment" Relationship="FilterTrackerModel.FK_TaskAttachments_Attachments" FromRole="TaskAttachment" ToRole="Attachment" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_TaskAttachments_CreateUsers" FromRole="TaskAttachment" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_TaskAttachments_UpdateUsers" FromRole="TaskAttachment" ToRole="User" />
+    <NavigationProperty Name="Task" Relationship="FilterTrackerModel.FK_TaskAttachment_Task" FromRole="TaskAttachment" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_TaskAttachments_Attachments">
+    <End Type="FilterTrackerModel.Attachment" Role="Attachment" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskAttachment" Role="TaskAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attachment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachment">
+        <PropertyRef Name="AttachmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PhysicianContactAttempt">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="PatientFilterId" Type="Int32" Nullable="false" />
+    <Property Name="ContactTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ContactResultCodeId" Type="Int32" Nullable="false" />
+    <Property Name="RelatedTaskId" Type="Int32" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ContactResultCode" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_ContactResultCodes" FromRole="PhysicianContactAttempt" ToRole="ContactResultCode" />
+    <NavigationProperty Name="ContactType" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_ContactTypes" FromRole="PhysicianContactAttempt" ToRole="ContactType" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Organizations" FromRole="PhysicianContactAttempt" ToRole="Organization" />
+    <NavigationProperty Name="PatientFilter" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_PatientFilters" FromRole="PhysicianContactAttempt" ToRole="PatientFilter" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Create" FromRole="PhysicianContactAttempt" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Update" FromRole="PhysicianContactAttempt" ToRole="User" />
+    <NavigationProperty Name="Task" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Tasks" FromRole="PhysicianContactAttempt" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_PhysicianContactAttempts_ContactResultCodes">
+    <End Type="FilterTrackerModel.ContactResultCode" Role="ContactResultCode" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactResultCode">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="ContactResultCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_ContactTypes">
+    <End Type="FilterTrackerModel.ContactType" Role="ContactType" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_PatientFilters">
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="PasswordHash" Type="Binary" MaxLength="500" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="LastSuccessfulLogin" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ComplicatingFactors" Relationship="FilterTrackerModel.FK_ComplicatingFactors_CreateUser" FromRole="User" ToRole="ComplicatingFactor" />
+    <NavigationProperty Name="ComplicatingFactors1" Relationship="FilterTrackerModel.FK_ComplicatingFactors_UpdateUser" FromRole="User" ToRole="ComplicatingFactor" />
+    <NavigationProperty Name="ContactResultCodes" Relationship="FilterTrackerModel.FK_ContactResultCodes_Users_Create" FromRole="User" ToRole="ContactResultCode" />
+    <NavigationProperty Name="ContactResultCodes1" Relationship="FilterTrackerModel.FK_ContactResultCodes_Users_Update" FromRole="User" ToRole="ContactResultCode" />
+    <NavigationProperty Name="Filters" Relationship="FilterTrackerModel.FK_Filters_Users_Create" FromRole="User" ToRole="Filter" />
+    <NavigationProperty Name="Filters1" Relationship="FilterTrackerModel.FK_Filters_Users_Update" FromRole="User" ToRole="Filter" />
+    <NavigationProperty Name="Indications" Relationship="FilterTrackerModel.FK_Indications_Users" FromRole="User" ToRole="Indication" />
+    <NavigationProperty Name="Indications1" Relationship="FilterTrackerModel.FK_Indications_Users1" FromRole="User" ToRole="Indication" />
+    <NavigationProperty Name="OrganizationDefaults" Relationship="FilterTrackerModel.FK_OrganizationDefaults_CreateUser" FromRole="User" ToRole="OrganizationDefault" />
+    <NavigationProperty Name="OrganizationDefaults1" Relationship="FilterTrackerModel.FK_OrganizationDefaults_UpdateUser" FromRole="User" ToRole="OrganizationDefault" />
+    <NavigationProperty Name="OrganizationFilters" Relationship="FilterTrackerModel.FK_OrganizationFilters_Users" FromRole="User" ToRole="OrganizationFilter" />
+    <NavigationProperty Name="OrganizationFilters1" Relationship="FilterTrackerModel.FK_OrganizationFilters_Users_Create" FromRole="User" ToRole="OrganizationFilter" />
+    <NavigationProperty Name="Organizations" Relationship="FilterTrackerModel.FK_Organizations_Users_Create" FromRole="User" ToRole="Organization" />
+    <NavigationProperty Name="Organizations1" Relationship="FilterTrackerModel.FK_Organizations_Users_Update" FromRole="User" ToRole="Organization" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_Users_Organizations" FromRole="User" ToRole="Organization" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Users_Create" FromRole="User" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PatientContactAttempts1" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Users_Update" FromRole="User" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_ProcedurePhysicians" FromRole="User" ToRole="PatientFilter" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Create" FromRole="User" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="PhysicianContactAttempts1" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Users_Update" FromRole="User" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="Physicians" Relationship="FilterTrackerModel.FK_Physicians_CreateUser" FromRole="User" ToRole="Physician" />
+    <NavigationProperty Name="Physicians1" Relationship="FilterTrackerModel.FK_Physicians_Users" FromRole="User" ToRole="Physician" />
+    <NavigationProperty Name="TaskAttachments" Relationship="FilterTrackerModel.FK_TaskAttachments_CreateUsers" FromRole="User" ToRole="TaskAttachment" />
+    <NavigationProperty Name="TaskAttachments1" Relationship="FilterTrackerModel.FK_TaskAttachments_UpdateUsers" FromRole="User" ToRole="TaskAttachment" />
+    <NavigationProperty Name="TaskTypes" Relationship="FilterTrackerModel.FK_TaskTypes_Users" FromRole="User" ToRole="TaskType" />
+    <NavigationProperty Name="TaskTypes1" Relationship="FilterTrackerModel.FK_TaskTypes_Users1" FromRole="User" ToRole="TaskType" />
+    <NavigationProperty Name="UserRoles" Relationship="FilterTrackerModel.FK_UserRoles_Users" FromRole="User" ToRole="UserRole" />
+    <NavigationProperty Name="Tasks" Relationship="FilterTrackerModel.FK_Tasks_Users" FromRole="User" ToRole="Task" />
+    <NavigationProperty Name="Tasks1" Relationship="FilterTrackerModel.FK_Tasks_Users_CreateUser" FromRole="User" ToRole="Task" />
+    <NavigationProperty Name="Tasks2" Relationship="FilterTrackerModel.FK_Tasks_Users_UpdateUser" FromRole="User" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_ComplicatingFactors_CreateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.ComplicatingFactor" Role="ComplicatingFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplicatingFactor">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplicatingFactors_UpdateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.ComplicatingFactor" Role="ComplicatingFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplicatingFactor">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactResultCodes_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.ContactResultCode" Role="ContactResultCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCode">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactResultCodes_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.ContactResultCode" Role="ContactResultCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCode">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Filter" Role="Filter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filter">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Filter" Role="Filter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filter">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Indications_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Indication" Role="Indication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indication">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Indications_Users1">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Indication" Role="Indication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indication">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationDefaults_CreateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationDefault" Role="OrganizationDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefault">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationDefaults_UpdateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationDefault" Role="OrganizationDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefault">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationFilter" Role="OrganizationFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilter">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.OrganizationFilter" Role="OrganizationFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilter">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organizations_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organizations_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organization">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_ProcedurePhysicians">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="ProcedurePhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Physicians_CreateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Physician" Role="Physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physician">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Physicians_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Physician" Role="Physician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physician">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachments_CreateUsers">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskAttachment" Role="TaskAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachment">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachments_UpdateUsers">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskAttachment" Role="TaskAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachment">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypes_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskType" Role="TaskType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskType">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypes_Users1">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskType" Role="TaskType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskType">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users_CREATE">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Users_Create">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.User" Role="User1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Users_Update">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.User" Role="User1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User1">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LoginHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MIPSHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="MIPS" Type="Decimal" Nullable="false" Precision="4" Scale="3" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskTypeId" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="PatientFilterId" Type="Int32" />
+    <Property Name="AssignedUserId" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClosedDate" Type="DateTime" Precision="0" />
+    <Property Name="TargetCloseDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_Tasks_Organizations" FromRole="Task" ToRole="Organization" />
+    <NavigationProperty Name="PatientContactAttempts" Relationship="FilterTrackerModel.FK_PatientContactAttempts_Tasks" FromRole="Task" ToRole="PatientContactAttempt" />
+    <NavigationProperty Name="PatientFilter" Relationship="FilterTrackerModel.FK_Tasks_PatientFilters" FromRole="Task" ToRole="PatientFilter" />
+    <NavigationProperty Name="PatientQuestionResponses" Relationship="FilterTrackerModel.FK_PatientQuestionResponses_Tasks" FromRole="Task" ToRole="PatientQuestionResponses" />
+    <NavigationProperty Name="PhysicianContactAttempts" Relationship="FilterTrackerModel.FK_PhysicianContactAttempts_Tasks" FromRole="Task" ToRole="PhysicianContactAttempt" />
+    <NavigationProperty Name="PhysicianQuestionResponses" Relationship="FilterTrackerModel.FK_PhysicianQuestionResponses_Tasks" FromRole="Task" ToRole="PhysicianQuestionResponses" />
+    <NavigationProperty Name="TaskAttachments" Relationship="FilterTrackerModel.FK_TaskAttachment_Task" FromRole="Task" ToRole="TaskAttachment" />
+    <NavigationProperty Name="TaskType" Relationship="FilterTrackerModel.FK_Tasks_TaskTypes" FromRole="Task" ToRole="TaskType" />
+    <NavigationProperty Name="User" Relationship="FilterTrackerModel.FK_Tasks_Users" FromRole="Task" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="FilterTrackerModel.FK_Tasks_Users_CreateUser" FromRole="Task" ToRole="User" />
+    <NavigationProperty Name="User2" Relationship="FilterTrackerModel.FK_Tasks_Users_UpdateUser" FromRole="Task" ToRole="User" />
+    <NavigationProperty Name="Patient" Relationship="FilterTrackerModel.FK_Tasks_Patients" FromRole="Task" ToRole="Patient" />
+  </EntityType>
+  <Association Name="FK_Tasks_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Tasks">
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PatientContactAttempt" Role="PatientContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempt">
+        <PropertyRef Name="RelatedTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_PatientFilters">
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilter">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_Tasks">
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientQuestionResponses" Role="PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Tasks">
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.PhysicianContactAttempt" Role="PhysicianContactAttempt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempt">
+        <PropertyRef Name="RelatedTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_Tasks">
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PhysicianQuestionResponses" Role="PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachment_Task">
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="FilterTrackerModel.TaskAttachment" Role="TaskAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachment">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_TaskTypes">
+    <End Type="FilterTrackerModel.TaskType" Role="TaskType" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="TaskTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="AssignedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users_CreateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users_UpdateUser">
+    <End Type="FilterTrackerModel.User" Role="User" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+    <Property Name="MRN" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="AddressLine1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PrimaryEmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SecondaryEmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUserId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateUserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Organization" Relationship="FilterTrackerModel.FK_Patients_Organizations" FromRole="Patient" ToRole="Organization" />
+    <NavigationProperty Name="PatientFilters" Relationship="FilterTrackerModel.FK_PatientFilters_Patient" FromRole="Patient" ToRole="PatientFilter" />
+    <NavigationProperty Name="Tasks" Relationship="FilterTrackerModel.FK_Tasks_Patients" FromRole="Patient" ToRole="Task" />
+  </EntityType>
+  <Association Name="FK_Patients_Organizations">
+    <End Type="FilterTrackerModel.Organization" Role="Organization" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Patient" Role="Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organization">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Patient">
+    <End Type="FilterTrackerModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="FilterTrackerModel.PatientFilter" Role="PatientFilter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilter">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Patients">
+    <End Type="FilterTrackerModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="FilterTrackerModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

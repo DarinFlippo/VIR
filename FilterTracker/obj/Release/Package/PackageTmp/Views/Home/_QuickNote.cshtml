@@ -1,0 +1,24 @@
+﻿@model FilterTracker.Models.QuickNote
+
+@{
+	string identifier = $"note-{Model.Id}";
+	string heading_id = identifier + "-heading";
+	string body_id = identifier + "-body";
+}
+
+<div id="@identifier" class="draggable ui-widget-content sticky-note-sm">
+	<div class="sticky-note-header-sm d-flex flex-row">
+		<div class="justify-content-start" style="width: 100%;">
+			<input type="text" class="note-heading-textbox" id="@heading_id" value="@Model.Heading" style="width: 100%;"/>
+		</div>
+		<div class="mr-auto" style="width: 50px; white-space: nowrap">
+			<i class="fa fa-window-minimize ml-1 mr-1" data-container="@identifier"></i>
+			<i class="fa fa-window-maximize mr-1" data-container="@identifier"></i>
+			<i class="fa fa-window-close mr-1" data-container="@identifier" data-note-id="@Model.Id"></i>
+		</div>
+	</div>
+	<div class="sticky-note-body">
+		<textarea id="@body_id" class="note-textarea">@Model.Body</textarea>
+	</div>
+	<input type="button" class="btn btn-primary btn-sm pull-right" value="Save" onclick="return EditNote(@Model.Id, '@identifier', '@heading_id', '@body_id');"/>
+</div>

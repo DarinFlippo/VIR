@@ -1,0 +1,353 @@
+﻿@model FilterTracker.Models.IntervalDataViewModel
+@{
+	ViewBag.Title = "Interval Report";
+}
+<br />
+<div class="container">
+	<hr />
+	<h2>@ViewBag.Title</h2>
+	<hr />
+
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="containeer">
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">Start Date</label>
+									@if (Model.start.HasValue)
+									{
+										<input type="date" id="start" name="start" class="form-control" value="@Model.start.Value" />
+									}
+									else
+									{
+										<input type="date" id="start" name="start" class="form-control" />
+									}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">End Date</label>
+									@if (@Model.end.HasValue)
+									{
+										<input type="date" id="end" name="end" class="form-control" value="@Model.end.Value" />
+									}
+									else
+									{
+										<input type="date" id="end" name="end" class="form-control" />
+									}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">Organization</label>
+									@Html.DropDownListFor(n => n.SelectedOrganizationId, Model.Organizations)
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<input type="submit" value="Submit" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	<hr />
+
+	@if (Model.IsCalculated)
+	{
+		<div class="row">
+			<div class="col">Filters Placed</div>
+			<div class="col">@Model.FiltersPlaced </div>
+		</div>
+		<div class="row">
+			<div class="col">A1</div>
+			<div class="col">@Model.A1 </div>
+		</div>
+		<div class="row">
+			<div class="col">A2</div>
+			<div class="col">@Model.A2 </div>
+		</div>
+		<div class="row">
+			<div class="col">A3</div>
+			<div class="col">@Model.A3 </div>
+		</div>
+		<div class="row">
+			<div class="col">A4</div>
+			<div class="col">@Model.A4 </div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				A1 Population
+			</div>
+			<div class="card-body">
+				<table class="table display" id="table-a1">
+					<thead>
+						<tr>
+							<th>MRN</th>
+							<th>Placement Date</th>
+							<th>Removal Date</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Birthdate</th>
+							<th>Deceased Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.A1Popluation)
+						{
+							<tr>
+								<td>@item.Patient.MRN</td>
+								<td>@item.ProcedureDate.Value.ToShortDateString()</td>
+								@if (item.ActualRemovalDate.HasValue)
+								{
+									<td>@item.ActualRemovalDate.Value.ToShortDateString()</td>
+								}
+								else
+								{
+									<td></td>
+								}
+								<td>@item.Patient.FirstName</td>
+								<td>@item.Patient.LastName</td>
+								<td>@item.Patient.DateOfBirth.ToShortDateString()</td>
+								@if (item.Patient.DeceasedDate.HasValue)
+								{
+								<td>@item.Patient.DeceasedDate.Value</td>
+								}
+								else
+								{
+								<td></td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				A2 Population
+			</div>
+			<div class="card-body">
+				<table class="table display" id="table-a2">
+					<thead>
+						<tr>
+							<th>MRN</th>
+							<th>Placement Date</th>
+							<th>Removal Date</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Birthdate</th>
+							<th>Deceased Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.A2Popluation)
+						{
+						<tr>
+							<td>@item.Patient.MRN</td>
+							<td>@item.ProcedureDate.Value.ToShortDateString()</td>
+							@if (item.ActualRemovalDate.HasValue)
+							{
+								<td>@item.ActualRemovalDate.Value.ToShortDateString()</td>
+							}
+							else
+							{
+								<td></td>
+							}
+							<td>@item.Patient.FirstName</td>
+							<td>@item.Patient.LastName</td>
+							<td>@item.Patient.DateOfBirth.ToShortDateString()</td>
+							@if (item.Patient.DeceasedDate.HasValue)
+							{
+								<td>@item.Patient.DeceasedDate.Value</td>
+							}
+							else
+							{
+								<td></td>
+							}
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				A3 Population
+			</div>
+			<div class="card-body">
+				<table class="table display" id="table-a3">
+					<thead>
+						<tr>
+							<th>MRN</th>
+							<th>Placement Date</th>
+							<th>Removal Date</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Birthdate</th>
+							<th>Deceased Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.A3Popluation)
+						{
+						<tr>
+							<td>@item.Patient.MRN</td>
+							<td>@item.ProcedureDate.Value.ToShortDateString()</td>
+							@if (item.ActualRemovalDate.HasValue)
+							{
+								<td>@item.ActualRemovalDate.Value.ToShortDateString()</td>
+							}
+							else
+							{
+								<td></td>
+							}
+							<td>@item.Patient.FirstName</td>
+							<td>@item.Patient.LastName</td>
+							<td>@item.Patient.DateOfBirth.ToShortDateString()</td>
+							@if (item.Patient.DeceasedDate.HasValue)
+							{
+								<td>@item.Patient.DeceasedDate.Value</td>
+							}
+							else
+							{
+								<td></td>
+							}
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				A4 Population
+			</div>
+			<div class="card-body">
+				<table class="table display" id="table-a4">
+					<thead>
+						<tr>
+							<th>MRN</th>
+							<th>Placement Date</th>
+							<th>Removal Date</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Birthdate</th>
+							<th>Deceased Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.A4Population)
+						{
+						<tr>
+							<td>@item.Patient.MRN</td>
+							<td>@item.ProcedureDate.Value.ToShortDateString()</td>
+							@if (item.ActualRemovalDate.HasValue)
+							{
+								<td>@item.ActualRemovalDate.Value.ToShortDateString()</td>
+							}
+							else
+							{
+								<td></td>
+							}
+							<td>@item.Patient.FirstName</td>
+							<td>@item.Patient.LastName</td>
+							<td>@item.Patient.DateOfBirth.ToShortDateString()</td>
+							@if (item.Patient.DeceasedDate.HasValue)
+							{
+								<td>@item.Patient.DeceasedDate.Value</td>
+							}
+							else
+							{
+								<td></td>
+							}
+						</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	}
+</div>
+
+
+
+
+@section  scripts{
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/dataTables.buttons.min.js"></script>
+	<script src="~/Scripts/buttons.flash.min.js"></script>
+	<script src="~/Scripts/jszip.min.js"></script>
+	<script src="~/Scripts/pdfmake.min.js"></script>
+	<script src="~/Scripts/vfs_fonts.js"></script>
+	<script src="~/Scripts/buttons.html5.min.js"></script>
+	<script src="~/Scripts/buttons.print.min.js"></script>
+	<script src="~/Scripts/dataTables.1.10.21.bootstrap4.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$("#loading-spinner").show('fast');
+
+			var table_a1 = $('#table-a1').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+			var table_a2 = $('#table-a2').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+			var table_a3 = $('#table-a3').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+
+			var table_a4 = $('#table-a4').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+
+		});
+	</script>
+}

@@ -1,0 +1,19 @@
+﻿@model  Dictionary<string, string>
+@{
+    ViewBag.Title = "Administrative Menu";
+}
+
+<br/>
+<br/>
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action active">
+        Actions
+    </a>
+    @foreach (var item in Model.Keys)
+    {
+        <a href="/Admin/@Model[item]" title="@item" class="list-group-item list-group-item-action">@item</a>
+    }
+</div>

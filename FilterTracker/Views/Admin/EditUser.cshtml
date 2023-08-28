@@ -1,0 +1,108 @@
+﻿@model FilterTracker.Models.UserEditorModel
+@{
+	ViewBag.Title = "Edit User";
+}
+<br />
+<h2>Edit User</h2>
+<hr />
+<p>
+	@Html.ActionLink("Back to list", "UserList")
+</p>
+<div class="container">
+	@if (!string.IsNullOrEmpty(Model.Message))
+	{
+		<div class="message-container">
+			@Html.Raw(Model.Message)
+		</div>
+	}
+	<form method="post" action="/Admin/Edituser" id="frm-create-user">
+		@Html.AntiForgeryToken()
+		@Html.HiddenFor(m => m.Id)
+
+		<div class="form-group">
+			<label for="Email">Email</label>
+			@Html.TextBoxFor(m => m.Email, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group">
+			<label for="FirstName">FirstName</label>
+			@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group">
+			<label for="LastName">LastName</label>
+			@Html.TextBoxFor(m => m.LastName, new { @class = "form-control margin-bottom-5" })
+			<span>@Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group">
+			<label for="SelectedRoles">Roles</label>
+			@Html.DropDownListFor(m => m.SelectedRoles, Model.Roles, new { @class = "form-control", multiple = "multiple" })
+			<span>@Html.ValidationMessageFor(m => m.SelectedRoles, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="form-group" id="def-rev">
+			<label for="DefaultReviewer">Default Reviewer</label>
+			@Html.CheckBoxFor(m => m.DefaultReviewer, new { @class = "form-control-checkbox margin-bottom-5" })
+		</div>
+		<div class="form-group">
+			<label for="OrganizationId">Organization</label>
+			@Html.DropDownListFor(m => m.OrganizationId, Model.Organizations, new { @class = "form-control" })
+			<span>@Html.ValidationMessageFor(m => m.OrganizationId, "", new { @class = "text-danger" })</span>
+		</div>
+		<div class="row">
+			<div class="col-sm-2 col-md-1 col-lg-1">
+				<label for="Active">Active</label>
+			</div>
+			<div class="col-sm-1 col-md-1 col-lg-1">
+				@Html.CheckBoxFor(m => m.Active, new { @class = "form-control-checkbox margin-bottom-5" })
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-2 col-md-2 col-lg-1 pull-left">
+				<button class="btn btn-primary" id="btn-submit" type="submit">Save</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+@section scripts{
+	<script type="text/javascript">
+        $(document).ready(function () {
+            var roles = "@string.Join(",", Model.SelectedRoles)";
+            var array = roles.split(",");
+
+
+          var select = $('#SelectedRoles').val(array);
+			select.trigger("change");
+
+			if (OptionExists($('#SelectedRoles')[0], "Physician"))
+			{
+				$("#def-rev").show('fast');
+			} else {
+				$("#def-rev").hide('fast');
+			}
+
+
+			$('#SelectedRoles').on('change', function () {
+				if (OptionExists($("#SelectedRoles")[0], "Physician"))
+				{
+					$("#def-rev").show('fast');
+				} else {
+					$("#DefaultReviewer").prop('checked', false);
+					$("#def-rev").hide('fast');
+				}
+			});
+
+		});
+
+		function OptionExists(select, val) {
+			var returned = [];
+			for (var i = 0; i < select.length; i++) {
+				if (select.options[i].selected && select.options[i].text == val)
+					returned.push(select.options[i].value);
+			}
+			return returned.length > 0;
+		}
+	</script>
+}
+

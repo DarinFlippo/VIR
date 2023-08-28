@@ -1,0 +1,559 @@
+﻿@model FilterTracker.Models.DashboardModel
+
+@{
+	ViewBag.Title = "Dashboard";
+}
+
+@using (Html.BeginForm("NULL", "Home", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+	@Html.AntiForgeryToken()
+}
+
+
+
+<div class="row" style="margin-top: 20px;">
+	<div class="col-12">
+		<div class="row justify-content-around" style="margin-top: 20px;">
+
+			@if (User.IsInRole(FilterTracker.Models.Roles.Physician))
+			{
+				<div class="col-4 mips-score-container" style="border: none !important;">
+					<canvas id="mips-graph-container">
+					</canvas>
+				</div>
+				<div class="col-4 dwell-time-container" style="border: none !important;">
+					<canvas id="dwell-time-graph-container">
+					</canvas>
+				</div>
+				<div class="col-4 rates-container" style="border: none !important;">
+					<canvas id="rates-graph-container">
+					</canvas>
+				</div>
+			}
+			else
+			{
+				<div class="col-4" style="border: none !important;">
+					<canvas id="graph1"></canvas>
+				</div>
+				<div class="col-4" style="border: none !important;">
+					<canvas id="graph2"></canvas>
+				</div>
+				<div class="col-4" style="border: none !important;">
+					<canvas id="graph3"></canvas>
+				</div>
+			}
+
+		</div>
+
+		<hr />
+
+		@if (User.IsInRole("Physician"))
+		{
+			<div class="row ">
+				<div class="card border-reviewcase text-lighter" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E;">
+					<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+						Review Case Tasks
+						<a class="pull-right" onclick="flipit('#rct-icon'); $('#rct_container').collapse('toggle');">
+							<i id="rct-icon" data-rotation="0" class="fa fa-angle-double-down "></i>
+						</a>
+					</div>
+					<div id="rct_container" class="card-body collapse" style="height: 300px;  overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+						@Html.Partial("_TaskList", Model.ReviewCaseTaskList)
+					</div>
+				</div>
+			</div>
+		}
+		else
+		{
+			<div id="containment-wrapper" class="row">
+
+				<div class="card text-white border-cpcp" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E">
+					<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+						<span class="pull-left">Quick Notes</span>
+						<a class="pull-left" style="margin-left: 20px; font-size: 0.9em;" onclick="NewNote();" href="#">New Note</a>
+						<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#notesicon'); $('#notes-container').collapse('toggle');">
+							<i id="notesicon" data-rotation="0" class="fa fa-angle-double-down "></i>
+						</a>
+					</div>
+					<div id="notes-container" class="card-body collapse">
+						@foreach (var item in Model.QuickNotes)
+						{
+							@Html.Partial("_QuickNote", item)
+						}
+					</div>
+				</div>
+			</div>
+
+
+			if (Model.BuildCaseTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card border-success text-lighter" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E; overflow: hidden">
+						<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+							Build Case Tasks
+							<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#bcticon'); $('#bct_container').collapse('toggle');">
+								<i id="bcticon" data-rotation="0" class="fa fa-angle-double-down "></i>
+							</a>
+						</div>
+						<div id="bct_container" class="card-body collapse" style="height: 300px; overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+							@Html.Partial("_TaskList", Model.BuildCaseTaskList)
+						</div>
+					</div>
+				</div>
+			}
+
+			if (Model.ScheduleRetrievalTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card text-lighter border-sr" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E">
+						<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+							Schedule Retrieval/Clinic Tasks
+							<a class="pull-right" onclick="flipit('#srticon'); $('#srt_container').collapse('toggle');">
+								<i id="srticon" data-rotation="0" class="fa fa-angle-double-down "></i>
+							</a>
+						</div>
+						<div id="srt_container" class="card-body collapse" style="height: 300px;  overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+							@Html.Partial("_TaskList", Model.ScheduleRetrievalTaskList)
+						</div>
+					</div>
+				</div>
+			}
+
+			if (Model.SendRegisteredLettersTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card border-primary text-lighter" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%;  background-color:#262B2E">
+						<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+							Send Registered Letter Tasks
+							<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#srlicon'); $('#srlt_container').collapse('toggle');">
+								<i id="srlicon" data-rotation="0" class="fa fa-angle-double-down "></i>
+							</a>
+						</div>
+						<div id="srlt_container" class="card-body collapse" style="height: 300px; overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+							@Html.Partial("_TaskList", Model.SendRegisteredLettersTaskList)
+						</div>
+					</div>
+				</div>
+			}
+
+
+			if (Model.RetrievalDatePassedTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card border-retrievalpassed text-lighter" style="margin-top: 20px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E;">
+						<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+							Retrieval Date Passed Tasks
+							<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#rdpicon'); $('#rdpt_container').collapse('toggle');">
+								<i id="rdpicon" data-rotation="0" class="fa fa-angle-double-down"></i>
+							</a>
+						</div>
+						<div id="rdpt_container" class="card-body collapse" style="height: 300px; overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+							@Html.Partial("_TaskList", Model.RetrievalDatePassedTaskList)
+						</div>
+					</div>
+				</div>
+			}
+
+			@*if (Model.PatientContactAttemptDueTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card border-pcad text-lighter" style="margin-top: 20px; margin-left: 10px; margin-right: 10px; width: 100%;  background-color:#262B2E">
+						<div class="card-header card-header-bg">
+							Patient Contact Attempt Due Tasks
+							<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#pcadicon'); $('#pcad_container').collapse('toggle');">
+								<i id="pcadicon" data-rotation="0" class="fa fa-angle-double-down "></i>
+							</a>
+						</div>
+						<div id="pcad_container" class="card-body collapse" style="height: 300px;overflow-y: scroll;">
+							@Html.Partial("_TaskList", Model.PatientContactAttemptDueTaskList)
+						</div>
+					</div>
+				</div>
+			}*@
+
+
+
+			@*<div class="row">
+				<div class="card border-white" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E">
+					<div class="card-header card-header-bg">
+						Review PCP Preferences Tasks
+						<a class="pull-right" onmouseover="this.style.cursor = 'pointer';" onmouseout="this.style.cursor='default';" onclick="flipit('#rpcpicon'); $('#rpcpt_container').collapse('toggle');">
+							<i id="rpcpicon" data-rotation="0" class="fa fa-angle-double-down "></i>
+						</a>
+					</div>
+					<div id="rpcpt_container" class="card-body collapse" style="height: 300px; overflow-y: scroll;">
+						@Html.Partial( "_TaskList", Model.ReviewPCPPreferencesTaskList )
+					</div>
+				</div>
+			</div>*@
+
+
+
+			if (Model.ContactPCPTaskList.Tasks.Any())
+			{
+				<div class="row">
+					<div class="card text-lighter border-cpcp" style="margin-top: 10px; margin-left: 10px; margin-right: 10px; width: 100%; background-color:#262B2E">
+						<div class="card-header card-header-bg" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
+							Contact PCP Tasks
+							<a class="pull-right" onclick="flipit('#cpcpicon'); $('#cpcp_container').collapse('toggle');">
+								<i id="cpcpicon" data-rotation="0" class="fa fa-angle-double-down "></i>
+							</a>
+						</div>
+						<div id="cpcp_container" class="card-body collapse" style="height: 300px; overflow: hidden; padding-top: 0px !important; margin-top: 0px !important;">
+							@Html.Partial("_TaskList", Model.ContactPCPTaskList)
+						</div>
+					</div>
+				</div>
+			}
+		}
+	</div>
+</div>
+
+<div id="task-dialog" class="modal" tabindex="-1" role="dialog">
+	<input type="hidden" id="TaskId" name="TaskId" value="" />
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 id="ModalTitle" class="modal-title"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="alert-container"></div>
+				<div id="modal-body"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" style="display: none;" id="save">Save</button>
+				<button type="button" class="btn btn-primary" id="complete">Complete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="select-physician-dialog" class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 id="ModalTitle" class="modal-title">Please select a physician to review this case:</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" value="" id="spTaskId" />
+				<select id="SelectedClinicPhysician" class="form-control">
+					@foreach (var item in Model.ClinicPhysicians)
+					{
+						<option id="@item.Value" value="@item.Value">@item.Text</option>
+					}
+				</select>
+			</div>
+			<div class="modal-footer">
+				<button id="btn-select-physician" type="button" class="btn btn-primary" data-dismiss="modal" onclick="CompleteBuildCaseTask($('#spTaskId').val(), $('#SelectedClinicPhysician').val());">Continue</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="qn-dialog" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog sticky-note">
+		<div class="modal-content sticky-note-content">
+			<div class="sticky-note-header">
+				<input type="text" id="qn-heading" value="" class="pull-left note-heading-textbox" />
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="sticky-note-body">
+				<textarea id="qn-body" class="note-textarea"></textarea>
+			</div>
+			<div class="sticky-note-footer">
+				<button id="btn-save-note" type="button" class="btn btn-primary btn-sm pull-right" data-dismiss="modal" onclick="SaveNote();">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section scripts{
+	<script src="~/Scripts/popper.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/dashboard.js"></script>
+	<script type="text/javascript" src="~/Scripts/Chart.js"></script>
+	<script type="text/javascript" src="~/Scripts/chartjs-plugin-annotation.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/jszip.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/pdfmake.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/vfs_fonts.js"></script>
+	<script type="text/javascript" src="~/Scripts/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/buttons.print.min.js"></script>
+}
+
+
+@section css{
+	<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+	<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+
+	<style type="text/css">
+		.hoverable:hover {
+			border: 1px solid #4195fc; /* some kind of blue border */
+			/* other CSS styles */
+			/* round the corners */
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			/* make it glow! */
+			-webkit-box-shadow: 0px 0px 4px #4195fc;
+			-moz-box-shadow: 0px 0px 4px #4195fc;
+			box-shadow: 0px 0px 4px #4195fc; /* some variation of blue for the shadow */
+		}
+		.card-header-bg {
+			background-color: #262B2E !important;
+		}
+
+		.dashboard-icon {
+			float: left;
+			width: 50px;
+			height: 60px;
+		}
+
+		.dashboard-category {
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			font-size: 18px;
+			font-weight: 500;
+			margin-left: 10px;
+		}
+
+		.tasks {
+			margin-top: 15px;
+		}
+
+		.task-container {
+			width: 100%;
+			height: 150px;
+		}
+
+		.table-container {
+			max-height: 300px;
+			overflow-y: scroll;
+		}
+
+		.sub-rate-1 {
+			font-size: 18px;
+			font-weight: 400;
+			background-color: seagreen;
+		}
+
+		.sub-rate-2 {
+			font-size: 18px;
+			font-weight: 400;
+			background-color: cadetblue;
+		}
+
+		.sub-rate-3 {
+			font-size: 18px;
+			font-weight: 400;
+			background-color: tomato;
+		}
+
+		.heading {
+			font-size: 26px;
+			font-weight: 700;
+		}
+
+		.sub-heading {
+			font-size: 22px;
+			font-weight: 500;
+		}
+
+		.active-cases-container {
+			width: 300px;
+			height: 300px;
+			background-color: #337ab7;
+			padding-top: 70px;
+			color: white;
+		}
+
+		.mips-score-container {
+			background-color: #262b2e;
+			padding-top: 10px;
+			color: white;
+		}
+
+		.dwell-time-container {
+			background-color: #262b2e;
+			padding-top: 10px;
+			color: white;
+		}
+
+		.rates-graph-container {
+			background-color: #262b2e;
+			padding-top: 10px;
+			color: white;
+		}
+
+		.contacts-pending-container {
+			width: 300px;
+			height: 300px;
+			background-color: #dd7d38;
+			padding-top: 70px;
+			color: white;
+		}
+
+		.retreival-rates-container {
+			width: 300px;
+			height: 300px;
+			background-color: #337ab7;
+			padding-top: 70px;
+			color: white;
+		}
+
+		.bg-orange {
+			background-color: #dd7d38;
+		}
+
+		th {
+			font-size: 1.2em;
+		}
+
+		.sticky-note-sm {
+			cursor: default;
+			width: 170px;
+			height: 100px;
+			background-color: #57b0e4;
+			font-size: 14px;
+			padding-left: 5px;
+			padding-bottom: 5px;
+			padding-right: 5px;
+			padding-top: 5px;
+			overflow: hidden;
+			margin-right: 10px;
+		}
+
+		.sticky-note-header-sm {
+			width: 100%;
+			height: 20px;
+			background-color: #50a9e0;
+			font-size: 12px;
+			font-weight: bold;
+			padding-left: 2px;
+		}
+
+		.sticky-note {
+			cursor: default;
+			width: 400px;
+			height: 300px;
+			background-color: #57b0e4;
+			font-size: 14px;
+			padding-left: 5px;
+			padding-bottom: 5px;
+			padding-right: 5px;
+			padding-top: 5px;
+			overflow: hidden;
+		}
+
+		.sticky-note-header {
+			width: 100%;
+			height: 30px;
+			background-color: #50a9e0;
+			font-size: 12px;
+			font-weight: bold;
+			padding-left: 2px;
+		}
+
+		.sticky-note-header-content {
+			font-size: 12px;
+			font-weight: bold;
+		}
+
+		.sticky-note-content {
+			background-color: #57b0e4 !important;
+			border: none !important;
+		}
+
+		.sticky-note-body {
+			height: 230px;
+		}
+
+		.sticky-note-footer {
+			height: 30px;
+		}
+
+		.note-heading-textbox {
+			background-color: transparent;
+			width: 90%;
+			height: 95%;
+			font-weight: bold;
+			font-size: 1.2em;
+			border-left: none;
+			border-right: none;
+			border-top: none;
+			border-bottom: 1px solid #337ab7;
+		}
+
+		.note-textarea {
+			background-color: transparent;
+			width: 95%;
+			height: 95%;
+			margin: 0px auto;
+			border: none;
+		}
+
+		#notes-container {
+			position: relative;
+			min-width: 0px;
+			max-height: 410px;
+			overflow: hidden;
+			display: flex;
+			flex-direction: row;
+			min-height: 0px;
+		}
+
+		#qn-dialog {
+		}
+
+		#qn-heading {
+		}
+
+		#qn-body {
+		}
+
+		#containment-wrapper {
+		}
+
+		.cell-header {
+			font-size: 1.1em;
+			font-weight: bolder;
+		}
+
+		.contact-type-cell {
+			text-align: left;
+			width: 50px;
+		}
+
+		.date-cell {
+			text-align: center;
+			width: 100px;
+		}
+
+		.contact-method-cell {
+			text-align: center;
+			width: 50px;
+		}
+
+		.contact-result-cell {
+			text-align: center;
+			width: 50px;
+		}
+
+		.contact-note-cell {
+			text-align: center;
+			width: 300px;
+		}
+	</style>
+}

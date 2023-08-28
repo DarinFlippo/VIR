@@ -1,0 +1,354 @@
+﻿@model FilterTracker.Models.PatientDetailsModel
+
+@{
+	ViewBag.Title = "Patient Details";
+}
+
+
+<td class="containeer">
+	<br />
+	<br />
+	<h2>@ViewBag.Title</h2>
+	<hr />
+
+	<div class="margin-bottom-20">
+		@Html.ActionLink("Back to Patient List", "PatientList", new { @class = "pull-left" })
+		@Html.ActionLink("New Filter", "CreatePatientFilter", new { id = Model.Patient.Id }, new { @class = "pull-right" })
+	</div>
+	@Html.HiddenFor(m => m.Patient.Id)
+	@Html.HiddenFor(m => m.Patient.OrganizationId)
+	<div class="card text-white bg-dark">
+		<div class="card-body">
+			<div class="container">
+				<div class="row row-cols-4">
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Name</span>
+							<span class="text-white text-left">@Model.Patient.FullName</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">MRN</span>
+							<span class="text-white text-left">@Model.Patient.MRN</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Birthdate</span>
+							<span class="text-white text-left">@Model.Patient.DateOfBirth.ToShortDateString()</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Gender</span>
+							@if (Model.Patient.Gender.HasValue)
+							{
+								if (Model.Patient.Gender.Value == 1)
+								{
+									<span class="text-white text-left">Male</span>
+								}
+								else
+								{
+									<span class="text-white text-left">Female</span>
+								}
+							}
+						</div>
+					</div>
+				</div>
+				<div class="row row-cols-2">
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Primary Phone Number</span>
+							<span class="text-white text-left">@Model.Patient.PrimaryPhoneNumber</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Primary Email</span>
+							<span class="text-white text-left">@Model.Patient.PrimaryEmailAddress</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<ul class="nav nav-pills" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="current-filters-tab" data-toggle="tab" href="#current-filters" role="tab" aria-controls="current-filter" aria-selected="true">Current Filters</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="filters-tab" data-toggle="tab" href="#filters" role="tab" aria-controls="filters" aria-selected="true">All Filters</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="comms-tab" data-toggle="tab" href="#comms" role="tab" aria-controls="comms" aria-selected="true">Communications</a>
+		</li>
+	</ul>
+	<div class="">
+		<div class="tab-content" id="patientTabContents">
+			<div class="tab-pane fade show active pad-all-10" id="current-filters" role="tabpanel" aria-labelledby="current-filters-tab">
+				<table class="table table-responsive">
+					<tr>
+						<th>Procedure Date</th>
+						<th>Procedure Physician</th>
+						<th>Target Removal Date</th>
+						<th>Filter</th>
+						<th></th>
+					</tr>
+					@foreach (var item in Model.CurrentFilters.OrderByDescending(n => n.CreateTimestamp))
+					{
+						<tr>
+
+							<td>
+								@{
+									if (item.ProcedureDate.HasValue)
+									{
+										@item.ProcedureDate.Value.ToShortDateString()
+									}
+								}
+							</td>
+							<td>
+								@{
+									string procedure_physician = "";
+									if (item.ProcedurePhysician != null)
+									{
+										procedure_physician = $"{item.ProcedurePhysician.FirstName} {item.ProcedurePhysician.LastName}";
+									}
+								}
+								@Html.Raw(procedure_physician)
+							</td>
+							<td>
+								@{
+									if (item.TargetRemovalDate.HasValue)
+									{
+										@item.TargetRemovalDate.Value.ToShortDateString()
+									}
+								}
+							</td>
+							<td>
+								@{
+									if (item.Filter != null)
+									{
+										@item.Filter.Name
+									}
+								}
+							</td>
+							<td>
+								@Html.ActionLink("Edit Patient Filter", "EditPatientFilter", new { Id = item.Id })&nbsp;| &nbsp;
+								@Html.ActionLink("Contact Patient", "ContactPatient", new { patientFilterId = item.Id }, new { disabled = "disabled" })&nbsp;| &nbsp;
+								@if (Model.CanExport)
+								{
+									@Html.ActionLink("Export Case Data", "ExportCaseData", new { patientFilterId = item.Id })
+									@Html.Raw("&nbsp;|&nbsp;")
+								}
+								@Html.ActionLink("Case History", "DisplayCaseHistory", new { patientFilterId = item.Id }, new { target = "_blank" })
+							</td>
+						</tr>
+					}
+				</table>
+			</div>
+			<div class="tab-pane fade pad-all-10" id="filters" role="tabpanel" aria-labelledby="filters-tab">
+				<table class="table table-responsive">
+					<tr>
+						<th>Procedure Date</th>
+						<th>Procedure Physician</th>
+						<th>Target Removal Date</th>
+						<th>Filter</th>
+						<th></th>
+					</tr>
+					@foreach (var item in Model.AllFilters.OrderByDescending(n => n.CreateTimestamp))
+					{
+						<tr>
+
+							<td>
+								@{
+									if (item.ProcedureDate.HasValue)
+									{
+										@item.ProcedureDate.Value.ToShortDateString()
+									}
+								}
+							</td>
+							<td>
+								@{
+									string procedure_physician = "";
+									if (item.ProcedurePhysician != null)
+									{
+										procedure_physician = $"{item.ProcedurePhysician.FirstName} {item.ProcedurePhysician.LastName}";
+									}
+								}
+								@Html.Raw(procedure_physician)
+							</td>
+							<td>
+								@{
+									if (item.TargetRemovalDate.HasValue)
+									{
+										@item.TargetRemovalDate.Value.ToShortDateString()
+									}
+								}
+							</td>
+							<td>
+								@{
+									if (item.Filter != null)
+									{
+										@item.Filter.Name
+									}
+								}
+							</td>
+							<td>
+								@Html.ActionLink("Edit Patient Filter", "EditPatientFilter", new { Id = item.Id })&nbsp;|&nbsp;
+								@Html.ActionLink("Contact Patient", "ContactPatient", new { Id = item.Id })&nbsp;|&nbsp;
+								@if (Model.CanExport)
+								{
+									@Html.ActionLink("Export Case Data", "ExportCaseData", new { patientFilterId = item.Id })
+									@Html.Raw("&nbsp;|&nbsp;")
+								}
+								@Html.ActionLink("Case History", "DisplayCaseHistory", new { patientFilterId = item.Id }, new { target = "_blank" })
+							</td>
+						</tr>
+					}
+				</table>
+			</div>
+			<div class="tab-pane fade pad-all-10" id="comms" role="tabpanel" aria-labelledby="comms-tab">
+				<table class="table table-responsive" id="contact-table">
+					<thead>
+						<tr>
+							<th>Filter</th>
+							<th>Contact Date</th>
+							<th>Procedure Date</th>
+							<th>Procedure Physician</th>
+							<th>Target Removal Date</th>
+							<th>Contact Type</th>
+							<th>Result</th>
+							<th>Contact Notes</th>
+							<th>Tracking Number</th>
+							<th>Task Type</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.ContactAttempts.OrderByDescending(n => n.Timestamp))
+						{
+							<tr>
+								<td>
+									@{
+										if (item.PatientFilter.Filter != null)
+										{
+											@item.PatientFilter.Filter.Name
+										}
+									}
+								</td>
+								<td>@item.Timestamp.ToShortDateString()</td>
+								<td>
+									@{
+										if (item.PatientFilter.ProcedureDate.HasValue)
+										{
+											@item.PatientFilter.ProcedureDate.Value.ToShortDateString()
+										}
+									}
+								</td>
+								<td>
+									@{
+										string procedure_physician = "";
+										if (item.PatientFilter.ProcedurePhysician != null)
+										{
+											procedure_physician = $"{item.PatientFilter.ProcedurePhysician.FirstName} {item.PatientFilter.ProcedurePhysician.LastName}";
+										}
+									}
+									@Html.Raw(procedure_physician)
+								</td>
+								<td>
+									@{
+										if (item.PatientFilter.TargetRemovalDate.HasValue)
+										{
+											@item.PatientFilter.TargetRemovalDate.Value.ToShortDateString()
+										}
+									}
+								</td>
+								<td>@item.ContactType.Name</td>
+								<td>
+									@item.ContactResultCode.ResultCode
+								</td>
+								<td>
+									@item.Notes
+								</td>
+								<td>
+									@item.TrackingNumber
+								</td>
+								<td>
+									@if (item.Task != null)
+									{
+										@item.Task.TaskType.Name
+									}
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	@section css{
+		<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+		<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+
+		<style>
+			.heading-text {
+				color: black;
+				font-weight: 500;
+				font-size: 1.1em;
+			}
+
+			.label {
+				color: black !important
+			}
+
+			.pad-top-10 {
+				padding-top: 10px;
+			}
+
+			.pad-top-20 {
+				padding-top: 20px;
+			}
+
+			.pad-left-10 {
+				padding-left: 10px;
+			}
+
+			.pad-right-10 {
+				padding-right: 10px;
+			}
+
+			.pad-all-10 {
+				padding: 10px 10px 10px 10px;
+			}
+
+			.content-panel {
+				min-height: 300px;
+				max-height: 600px;
+				margin-top: 5px;
+			}
+		</style>
+	}
+
+	@section scripts{
+		<script src="~/Scripts/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript">
+
+			$(function () {
+				$('#current-filters-tab').tab('show')
+
+				try {
+					var table = $('#contact-table').DataTable({
+						"pagingType": "first_last_numbers",
+						responsive: true
+					});
+				}
+				catch (e) {
+					alert(e);
+				}
+			})
+		</script>
+	}
+

@@ -1,0 +1,141 @@
+﻿@model FilterTracker.Models.OrganizationEditorViewModel
+@{
+    ViewBag.Title = "Create Organization";
+}
+    <br />
+	<div class="containeer">
+		<h2>Create Organization</h2>
+		<hr />
+
+		<div class="margin-bottom-20">
+			@Html.ActionLink("Back to List", "OrganizationList")
+		</div>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+			@Html.HiddenFor(m => m.OrganizationId)
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="Name">Name</label>
+					@Html.TextBoxFor(m => m.Name, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })</span>
+				</div>
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="MaxUsers">Maximum Users</label>
+					@Html.TextBoxFor(m => m.MaxUsers, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.MaxUsers, "", new { @class = "text-danger" })</span>
+				</div>
+				<div class="form-group col-sm-4 col-md-4 col-lg-4" style="padding-top: 30px;">
+					<label for="Active" style="margin-right: 10px;">Active</label>
+					@Html.CheckBoxFor(m => m.Active, new { @class = "form-control-checkbox margin-bottom-5" })
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8 col-md-8 col-lg-8">
+					<div class="form-group">
+						<label for="Description">Description</label>
+						@Html.TextBoxFor(m => m.Description, new { @class = "form-control margin-bottom-5" })
+						<span>@Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="ContactName">Contact Name</label>
+					@Html.TextBoxFor(m => m.ContactName, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.ContactName, "", new { @class = "text-danger" })</span>
+				</div>
+
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="ContactEmail">Contact Email</label>
+					@Html.TextBoxFor(m => m.ContactEmail, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.ContactEmail, "", new { @class = "text-danger" })</span>
+				</div>
+
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="ContactPhone">Contact Phone</label>
+					@Html.TextBoxFor(m => m.ContactPhone, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.ContactPhone, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="AddressLine1">Address Line 1</label>
+					@Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.AddressLine1, "", new { @class = "text-danger" })</span>
+				</div>
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="AddressLine2">Address Line 2</label>
+					@Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.AddressLine2, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="City">City</label>
+					@Html.TextBoxFor(m => m.City, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })</span>
+				</div>
+
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="State">State</label>
+					@Html.DropDownListFor(m => m.State, Model.StateList, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })</span>
+				</div>
+
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					<label for="Zipcode">Zipcode</label>
+					@Html.TextBoxFor(m => m.Zipcode, new { @class = "form-control margin-bottom-5", @type="number" })
+					<span>@Html.ValidationMessageFor(m => m.Zipcode, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					@Html.LabelFor(m => m.FilterAge)
+					@Html.TextBoxFor(m => m.FilterAge, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.FilterAge, "", new { @class = "text-danger", @type="number" })</span>
+				</div>
+
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					@Html.LabelFor(m => m.ReassessDays)
+					@Html.TextBoxFor(m => m.ReassessDays, new { @class = "form-control margin-bottom-5", @type="number" })
+					<span>@Html.ValidationMessageFor(m => m.ReassessDays, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					@Html.LabelFor(m => m.ContactAttemptsBeforeRegisteredLetter)
+					@Html.TextBoxFor(m => m.ContactAttemptsBeforeRegisteredLetter, new { @class = "form-control margin-bottom-5", @type = "number" })
+					<span>@Html.ValidationMessageFor(m => m.ContactAttemptsBeforeRegisteredLetter, "", new { @class = "text-danger" })</span>
+				</div>
+				<div class="form-group col-sm-4 col-md-4 col-lg-4">
+					@Html.LabelFor(m => m.PatientContactDays)
+					@Html.TextBoxFor(m => m.PatientContactDays, new { @class = "form-control margin-bottom-5", @type = "number" })
+					<span>@Html.ValidationMessageFor(m => m.PatientContactDays, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="row">
+				<div class="col-sm-1 col-md-1 col-lg-1">
+					<input type="submit" class="btn btn-primary" value="Save" />
+				</div>
+			</div>
+
+		}
+	</div>
+
+
+

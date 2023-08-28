@@ -1,0 +1,140 @@
+﻿@model FilterTracker.Controllers.HomeController.FilterDwellTimeReportModel
+
+@{
+	ViewBag.Title = "Filter Dwell Time Statistics";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<br/>
+<br/>
+<h4>@ViewBag.Title</h4>
+<hr/>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			@using (Html.BeginForm())
+			{
+				@Html.AntiForgeryToken()
+				<table class="table-borderless">
+					<tr>
+						<td>@Html.LabelFor(_ => _.Start)</td>
+						<td style="padding-left: 10px;">@Html.EditorFor(_ => _.Start, new { @class = "form-control" })</td>
+						<td width="30">&nbsp;</td>
+						<td>@Html.LabelFor(_ => _.End)</td>
+						<td style="padding-left: 10px;">@Html.EditorFor(_ => _.End, new { @class = "form-control" })</td>
+						<td style="padding-left: 15px;"><input type="submit" value="Submit" class="btn btn-primary" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="alert">@Html.ValidationMessageFor(_ => _.Start)</td>
+						<td>&nbsp;</td>
+						<td colspan="2" class="alert">@Html.ValidationMessageFor(_ => _.End)</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+			}
+		</div>
+	</div>
+
+	@if (Model.IsPost)
+	{
+		<div class="row">
+			<div class="col-4 category">
+				Total Filters Placed
+			</div>
+			<div class="col-2 category-value">
+				@Model.Placed
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Total Filters Removed
+			</div>
+			<div class="col-2 category-value">
+				@Model.Removed
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Filters Made Permanent
+			</div>
+			<div class="col-2 category-value">
+				@Model.MadePermanent
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Average Dwell Time
+			</div>
+			<div class="col-2 category-value">
+				@Model.Average days
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Median Dwell Time
+			</div>
+			<div class="col-2 category-value">
+				@Model.Median days
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Max Dwell Time
+			</div>
+			<div class="col-2 category-value">
+				@Model.Maximum days
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-4 category">
+				Min Dwell Time
+			</div>
+			<div class="col-2 category-value">
+				@Model.Minimum days
+			</div>
+			<div class="col-6"></div>
+		</div>
+		<br />
+		<br/>
+		<div class="row">
+			<div class="col-4 category">
+				MPIS Score for Time Period
+			</div>
+			<div class="col-2 category-value">
+				@Model.Minimum days
+			</div>
+			<div class="col-6"></div>
+		</div>
+	}
+</div>
+
+@section css{
+	<style type="text/css">
+		.category {
+			background-color:  dimgray;
+			color: white;
+			font-weight: bold;
+			font-size: medium;
+			padding: 10px 10px 10px 10px;
+		}
+		.category-value {
+			background-color: darkgray;
+			color: white;
+			font-size: small;
+			padding: 10px 10px 10px 10px;
+		}
+	</style>
+}

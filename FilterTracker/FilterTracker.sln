@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterTracker", "FilterTracker.csproj", "{6AC75506-F315-452D-95A5-CAEB35537CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterTrackerTests", "..\FilterTrackerTests\FilterTrackerTests.csproj", "{69ABE670-A2F8-44BC-BBFC-5BCBD43ADBEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIPSCalculator", "..\MIPSCalculator\MIPSCalculator.csproj", "{4020874D-B2A1-4FBB-A669-A2D9BEA86454}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AC75506-F315-452D-95A5-CAEB35537CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC75506-F315-452D-95A5-CAEB35537CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC75506-F315-452D-95A5-CAEB35537CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC75506-F315-452D-95A5-CAEB35537CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69ABE670-A2F8-44BC-BBFC-5BCBD43ADBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69ABE670-A2F8-44BC-BBFC-5BCBD43ADBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69ABE670-A2F8-44BC-BBFC-5BCBD43ADBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69ABE670-A2F8-44BC-BBFC-5BCBD43ADBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4020874D-B2A1-4FBB-A669-A2D9BEA86454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4020874D-B2A1-4FBB-A669-A2D9BEA86454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4020874D-B2A1-4FBB-A669-A2D9BEA86454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4020874D-B2A1-4FBB-A669-A2D9BEA86454}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2F99F34-2AAD-4DCE-843F-C31E867EB38B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ddck.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FilterTracker.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\FilterTrackerTests\\FilterTrackerTests.csproj
+		SccProjectName2 = ../FilterTrackerTests
+		SccLocalPath2 = ..\\FilterTrackerTests
+		SccProjectUniqueName3 = ..\\MIPSCalculator\\MIPSCalculator.csproj
+		SccProjectName3 = ../MIPSCalculator
+		SccLocalPath3 = ..\\MIPSCalculator
+	EndGlobalSection
+EndGlobal

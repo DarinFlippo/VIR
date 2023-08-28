@@ -1,0 +1,217 @@
+﻿@model FilterTracker.Models.Task
+
+
+
+<div class="card" style="width: 100%;">
+	<div class="card-header">
+		@Model.TaskType.Name
+	</div>
+	<div class="card-body">
+		<div class="col-12">
+			<h5>Notes</h5>
+			<p class="ml-2 mt-1 p-2">
+				@Html.Raw(Model.Notes)
+			</p>
+		</div>
+		<div class="accordion mt-1">
+			<div class="col-12 card">
+				<div class="card-header">
+					<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#details-container-@Model.Id" aria-expanded="true" aria-controls="details-container-@Model.Id">Details</button>
+				</div>
+				<div id="details-container-@Model.Id" class="collapse">
+					<div class="container">
+						<div class="row">
+							<div class="col-4">
+								<span class="text-nowrap text-left">Assigned User</span>
+								@if (Model.AssignedUser != null)
+								{
+									<span class="text-nowrap text-left text-white-50 pl-3">@Model.AssignedUser.Email</span>
+								}
+								else
+								{
+									<span class="text-nowrap text-left text-light"></span>
+								}
+							</div>
+							<div class="col-4">
+								<span class="text-nowrap text-left pl-3">Closed Date</span>
+								@if (Model.ClosedDate.HasValue)
+								{
+									<span class="text-nowrap text-left text-white-50 pl-3">@Model.ClosedDate.Value.ToShortDateString()</span>
+								}
+								else
+								{
+									<span class="text-nowrap text-left text-body"></span>
+								}
+							</div>
+							<div class="col-4">
+								<span class="text-nowrap text-left pl-3">Target Close Date</span>
+								<span class="text-nowrap text-left text-white-50 pl-3">@Model.TargetCloseDate.ToShortDateString()</span>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-4">
+								<span class="text-nowrap text-left">Created By</span>
+								<span class="text-nowrap text-left text-white-50 pl-3">@Model.CreateUser.Email</span>
+							</div>
+							<div class="col-4">
+								<span class="text-nowrap text-left pl-3">Created</span>
+								<span class="text-nowrap text-left text-white-50 pl-3">@Model.UpdateTimestamp</span>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-4">
+								<span class="text-nowrap text-left">Last Updated By</span>
+								<span class="text-nowrap text-left text-white-50 pl-3">@Model.UpdateUser.Email</span>
+							</div>
+							<div class="col-4">
+								<span class="text-nowrap text-left pl-3">Updated</span>
+								<span class="text-nowrap text-left text-white-50 pl-3">@Model.UpdateTimestamp</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			@if (Model.PatientContactAttempts.Any())
+			{
+				<div class="col-12 card">
+					<div class="card-header">
+						<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#pc-@Model.Id" aria-expanded="true" aria-controls="pc-@Model.Id">Patient Contacts</button>
+					</div>
+					<div class="ml-2 mt-1 p-2 collapse" id="pc-@Model.Id">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Result</th>
+									<th>Timestamp</th>
+									<th>Tracking Number</th>
+									<th>Notes</th>
+								</tr>
+							</thead>
+							@foreach (var item in Model.PatientContactAttempts)
+							{
+								<tr>
+									<td class="text-nowrap text-left text-white-50">
+										@item.ContactType.Name
+									</td>
+									<td class="text-nowrap text-left text-white-50">@item.ContactResultCode.ResultCode</td>
+									<td class="text-nowrap text-left text-white-50">@item.Timestamp</td>
+									<td class="text-nowrap text-left text-white-50">@item.TrackingNumber</td>
+									<td class="text-left text-white-50">@item.Notes</td>
+								</tr>
+							}
+						</table>
+					</div>
+				</div>
+			}
+
+			@if (Model.PhysicianContactAttempts.Any())
+			{
+				<div class="col-12 card">
+					<div class="card-header">
+						<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#phc-@Model.Id" aria-expanded="true" aria-controls="phc-@Model.Id">PCP Contacts</button>
+					</div>
+					<div class="ml-2 mt-1 p-2 collapse" id="phc-@Model.Id">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Result</th>
+									<th>Timestamp</th>
+									<th>Notes</th>
+								</tr>
+							</thead>
+							@foreach (var item in Model.PhysicianContactAttempts)
+							{
+								<tr>
+									<td class="text-nowrap text-left text-white-50">
+										@item.ContactType.Name
+									</td>
+									<td class="text-nowrap text-left text-white-50">@item.ContactResultCode.ResultCode</td>
+									<td class="text-nowrap text-left text-white-50">@item.Timestamp</td>
+									<td class="text-left text-white-50">@item.Notes</td>
+								</tr>
+							}
+						</table>
+					</div>
+				</div>
+			}
+			@if (Model.TaskAttachments.Any())
+			{
+				<div class="col-12 card">
+					<div class="card-header">
+						<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#uploads-container-@Model.Id" aria-expanded="true" aria-controls="uploads-container-@Model.Id">Uploads</button>
+					</div>
+					<div id="uploads-container-@Model.Id" class="collapse">
+						<table id="attachments-table" class="table" style="font-size: 0.9em">
+							<thead>
+								<tr>
+									<th>Filename</th>
+									<th>Uploaded</th>
+									<th>Size</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model.TaskAttachments)
+								{
+									<tr>
+										<td align="left">@item.Attachment.FileName</td>
+										<td align="left">@item.Attachment.CreateTimestamp</td>
+										<td align="left">@FilterTracker.FormattingHelpers.GetFileSizeString(item.Attachment.FileSize)</td>
+										<td>
+											<a href="#" onclick="window.open('/Home/DownloadFile?id=@item.Id', '_blank');" style="font-size: 0.9em">Download</a>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			}
+
+			@if (Model.PatientQuestionResponses.Any())
+			{
+
+				<div class="col-12 card">
+					<div class="card-header">
+						<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#pqc-@Model.Id" aria-expanded="true" aria-controls="pqc-@Model.Id">Patient Questions</button>
+					</div>
+					<div id="pqc-@Model.Id" class="collapse">
+						@foreach (var item in Model.PatientQuestionResponses)
+						{
+							<ul class="list-group list-group-horizontal border-0">
+								<li class="list-group-item border-0">@item.PatientQuestion.Question</li>
+								<li class="list-group-item border-0 text-white-50">@Html.Raw(item.Response)</li>
+							</ul>
+						}
+					</div>
+				</div>
+
+			}
+
+			@if (Model.PhysicianQuestionResponses.Any())
+			{
+				<div class="col-12 card">
+					<div class="card-header">
+						<button class="btn btn-primary text-left" type="button" data-toggle="collapse" data-target="#phqc-@Model.Id" aria-expanded="true" aria-controls="phqc-@Model.Id">PCP Questions</button>
+					</div>
+					<div id="phqc-@Model.Id" class="collapse">
+						@foreach (var item in Model.PhysicianQuestionResponses)
+						{
+							<ul class="list-group list-group-horizontal border-0">
+								<li class="list-group-item border-0">@item.PhysicianQuestion.Question</li>
+								<li class="list-group-item border-0 text-white-50">@Html.Raw(item.Response)</li>
+							</ul>
+						}
+					</div>
+				</div>
+			}
+
+
+
+		</div>
+	</div>
+</div>

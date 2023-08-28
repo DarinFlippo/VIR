@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "dd81517d-093e-4cef-a74a-53694676a393"
+        },
+        "name": {
+            "value": "ftprototype"
+        },
+        "location": {
+            "value": "Central US"
+        },
+        "hostingEnvironment": {
+            "value": ""
+        },
+        "hostingPlanName": {
+            "value": "FilterTrackerServicePlan"
+        },
+        "serverFarmResourceGroup": {
+            "value": "FilterTrackerResourcesGroup"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "sku": {
+            "value": "Free"
+        },
+        "skuCode": {
+            "value": "F1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "currentStack": {
+            "value": "dotnet"
+        },
+        "netFrameworkVersion": {
+            "value": "v4.0"
+        }
+    }
+}

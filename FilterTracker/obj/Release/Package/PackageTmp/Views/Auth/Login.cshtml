@@ -1,0 +1,44 @@
+﻿@model FilterTracker.Models.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<br/>
+<br/>
+<h3>Welcome to Filter Tracker!</h3>
+<h5>Please sign in.</h5>
+<br/>
+
+<div class="container">
+    <form method="post" action="/Auth/Login" id="login-form" target="_self">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.RedirectTo)
+
+        <div class="form-group">
+            <label for="Username">Username</label>
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control margin-bottom-5", style="width: 300px !important;" })
+            <span>@Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })</span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Password">Password</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control margin-bottom-5", style="width: 300px !important;" })
+            <span>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</span>
+        </div>
+
+        <div class="row row-cols-1 margin-bottom-20">
+            <div class="col">
+                <label for="RememberMe">
+                    Remember&nbsp;Me 
+                    @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-control-checkbox margin-bottom-5 margin-left-15" })
+                </label>
+            </div>
+        </div>
+
+        <div class="row row-cols-1">
+            <div class="col pull-left">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,397 @@
+﻿@model FilterTracker.Models.PatientEditorModel
+
+@{
+	ViewBag.Title = "Create Patient";
+}
+
+
+<div class="container">
+	<br />
+	<br />
+	<h2>Create Patient</h2>
+	<hr />
+
+	<div class="margin-bottom-20">
+		@Html.ActionLink("Back to Patient List", "PatientList")
+	</div>
+
+	@using (Html.BeginForm("CreatePatient", "Home", null, FormMethod.Post, new { id = "create-patient-form" }))
+	{
+		@Html.AntiForgeryToken()
+
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+		@Html.HiddenFor(m => m.Id)
+		@Html.HiddenFor(m => m.OrganizationId)
+		@Html.HiddenFor(m => m.Active)
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					<label for="MRN" id="MRNLabel">MRN</label>
+					@Html.TextBoxFor(m => m.MRN, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.MRN, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.FirstName, new { id = "FirstNameLabel" })
+					@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.MiddleName, new { id = "MiddleNameLabel" })
+					@Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.MiddleName, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.LastName, new { id = "LastNameLabel" })
+					@Html.TextBoxFor(m => m.LastName, new { @class = "form-control margin-bottom-5" })
+					<span>@Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.DateOfBirth, new { id = "DateOfBirthLabel" })
+					<br />
+					<input id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirthFormatted" type="date" class="form-control margin-bottom-5" />
+					<span>@Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.DeceasedDate, new { id = "DeceasedDateLabel" })
+					<br />
+					<input id="DeceasedDate" name="DeceasedDate" value="@Model.DeceasedDateFormatted" type="date" class="form-control margin-bottom-5" />
+					<span>@Html.ValidationMessageFor(m => m.DeceasedDate, "", new { @class = "text-danger" })</span>
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.SelectedGender, new { id = "GenderLabel" })
+					@Html.DropDownListFor(m => m.SelectedGender, Model.Genders, new { @class = "form-control margin-bottom-5" })
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.PrimaryPhoneNumber, new { id = "PrimaryPhoneNumberLabel" })
+					@Html.TextBoxFor(m => m.PrimaryPhoneNumber, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.PrimaryPhoneNumber, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.SecondaryPhoneNumber, new { id = "SecondaryPhoneNumberLabel" })
+					@Html.TextBoxFor(m => m.SecondaryPhoneNumber, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.SecondaryPhoneNumber, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.PrimaryEmailAddress, new { id = "PrimaryEmailAddressLabel" })
+					@Html.TextBoxFor(m => m.PrimaryEmailAddress, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.PrimaryEmailAddress, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.SecondaryEmailAddress, new { id = "SecondaryEmailAddressLabel" })
+					@Html.TextBoxFor(m => m.SecondaryEmailAddress, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.SecondaryEmailAddress, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.AddressLine1, new { id = "AddressLine1Label" })
+					@Html.TextBoxFor(m => m.AddressLine1, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.AddressLine1, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.AddressLine2, new { id = "AddressLine2Label" })
+					@Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.AddressLine2, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.City, new { id = "CityLabel" })
+					@Html.TextBoxFor(m => m.City, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.State, new { id = "StateLabel" })
+					@Html.DropDownListFor(m => m.State, Model.States, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+					@Html.LabelFor(m => m.Zipcode, new { id = "ZipcodeLabel" })
+					@Html.TextBoxFor(m => m.Zipcode, new { @class = "form-control margin-bottom-5" })
+					@Html.ValidationMessageFor(m => m.Zipcode, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-1 col-md-1 col-lg-1">
+				<input type="button" id="btnSave" class="btn btn-primary" value="Save" />
+			</div>
+		</div>
+
+		<div id="msg-dialog" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 id="modal-title" class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="modal-message">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="continue-button">Continue</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+<div class="toast bg-primary border-info" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 100px; right: 200px;">
+	<div class="toast-header bg-primary">
+		<i class="fa fa-newspaper-o" style="color: white"></i>
+		<span class="ml-2 mr-auto" style="color: white" id="alert-title"></span>
+		<button type="button" class="ml-2 mb-1 close text-lighter" data-dismiss="toast" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="toast-body bg-primary" style="color: white;" id="alert-body"></div>
+</div>
+
+
+@section css{
+	<style>
+		.verify-container {
+			font-family: 'Lucida Sans Unicode';
+			font-size: 0.9em;
+		}
+
+		.verify-heading-container {
+		}
+
+		.verify-heading {
+			font-weight: bolder;
+		}
+
+		.field-row {
+			margin-top: 2px;
+			margin-bottom: 2px;
+			margin-left: 20px;
+		}
+
+		.field-label {
+			text-align: right;
+			margin-left: 20px;
+		}
+
+		.field-val {
+			text-align: left;
+			margin-left: 15px;
+		}
+	</style>
+}
+
+@section scripts{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.modal').modal('hide');
+			$('.toast').toast({ delay: 5000, autohide: true, animation: true });
+		});
+
+		function DisplayAlert(heading, msg) {
+			try {
+				var tgt = $("#alert-body");
+				tgt.html(msg);
+				tgt = $("#alert-title");
+				tgt.html(heading);
+				$('.toast').toast('show');
+			}
+			catch (e) {
+				alert(e);
+			}
+		}
+
+		function displaySummary() {
+			var fields = new Array();
+
+			var val = $("#MRN").val();
+			if (val != '') {
+				fields.push({ Label: $("#MRNLabel").html(), Value: val });
+			}
+
+			val = $("#FirstName").val();
+			if (val != '') {
+				fields.push({ Label: $("#FirstNameLabel").html(), Value: val });
+			}
+
+			val = $("#MiddleName").val();
+			if (val != '') {
+				fields.push({ Label: $("#MiddleNameLabel").html(), Value: val });
+			}
+
+			val = $("#LastName").val();
+			if (val != '') {
+				fields.push({ Label: $("#LastNameLabel").html(), Value: val });
+			}
+
+			val = $("#DateOfBirth").val();
+			if (val != '') {
+				fields.push({ Label: $("#DateOfBirthLabel").html(), Value: val });
+			}
+
+			val = $("#Gender").val();
+			if (val != '') {
+				fields.push({ Label: $("#GenderLabel").html(), Value: val });
+			}
+
+			val = $("#PrimaryPhoneNumber").val();
+			if (val != '') {
+				fields.push({ Label: $("#PrimaryPhoneNumberLabel").html(), Value: val });
+			}
+
+			val = $("#SecondaryPhoneNumber").val();
+			if (val != '') {
+				fields.push({ Label: $("#SecondaryPhoneNumberLabel").html(), Value: val });
+			}
+
+			val = $("#PrimaryEmailAddress").val();
+			if (val != '') {
+				fields.push({ Label: $("#PrimaryEmailAddressLabel").html(), Value: val });
+			}
+
+			val = $("#SecondaryEmailAddress").val();
+			if (val != '') {
+				fields.push({ Label: $("#SecondaryEmailAddressLabel").html(), Value: val });
+			}
+
+			val = $("#AddressLine1").val();
+			if (val != '') {
+				fields.push({ Label: $("#AddressLine1Label").html(), Value: val });
+			}
+
+			val = $("#AddressLine2").val();
+			if (val != '') {
+				fields.push({ Label: $("#AddressLine2Label").html(), Value: val });
+			}
+
+			val = $("#City").val();
+			if (val != '') {
+				fields.push({ Label: $("#CityLabel").html(), Value: val });
+			}
+
+			val = $("#State").val();
+			if (val != '') {
+				fields.push({ Label: $("#StateLabel").html(), Value: val });
+			}
+
+			val = $("#Zipcode").val();
+			if (val != '') {
+				fields.push({ Label: $("#ZipcodeLabel").html(), Value: val });
+			}
+
+			var html = "<div class='container verify-container'><div class='row verify-heading-container'><span class='verify-heading'>Please verify that the information is correct:</span></div>";
+
+			for (i = 0; i < fields.length; i++) {
+				html += "<div class='row field-row'><span class='field-label'>" + fields[i].Label + "</span><span class='field-val'>" + fields[i].Value + "</span></div>";
+			}
+			html += "</div>";
+
+			$("#modal-message").html(html);
+			$('#modal-title').html('Input Verification');
+			$('#msg-dialog').modal('show');
+
+		}
+
+		$("#continue-button").on('click', function () {
+			var serialized = $("form").serialize();
+			$.ajax({
+				url: $(this).data('/Home/CreatePatient'),
+				type: 'POST',
+				data: serialized,
+				success: function (result) {
+					if (result.Status == 'OK') {
+						DisplayAlert("Success", "Data saved.");
+						var pid = result.Id;
+						window.location = '/Home/CreatePatientFilter?id=' + pid;
+					} else {
+						$('#modal-title').html('Error');
+						$('#modal-message').html(result.Message);
+						$('#modal-dialog').modal('show');
+					}
+
+					$('#modal-dialog').modal('show');
+				},
+				error: function (xhr, error, status) {
+					if (xhr.responseText != null && xhr.responseText.length > 0) {
+						$('#modal-message').html(xhr.responseText);
+					}
+					else {
+						$('#modal-message').html(error + "::" + status);
+					}
+					$('#modal-title').html('Error');
+					$('#modal-dialog').modal('show');
+				}
+			});
+			return false;
+		});
+
+		$('#btnSave').on('click', function () {
+			if ($("#create-patient-form").valid()) {
+				displaySummary();
+			}
+		});
+	</script>
+}
+

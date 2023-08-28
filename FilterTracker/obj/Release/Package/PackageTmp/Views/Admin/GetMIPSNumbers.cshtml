@@ -1,0 +1,159 @@
+﻿@model FilterTracker.Models.GetMIPSNumbersModel
+@{
+	ViewBag.Title = "Create Filter";
+}
+<br />
+<div class="containeer">
+	<hr/>
+	<h2>Get MIPS Data</h2>
+	<hr />
+
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="containeer">
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">Start Date</label>
+									<input type="date" id="start" name="start" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">End Date</label>
+									<input type="date" id="end" name="end" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="start">Organization</label>
+									@Html.DropDownListFor(n => n.SelectedOrganizationId, Model.Organizations)
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<input type="submit" value="Submit" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		if (Model.IsCalculated)
+		{
+			<div class="row">
+				<div class="col-1">Numerator</div>
+				<div class="col-1">@Model.Numerator</div>
+			</div>
+			<div class="row">
+				<div class="col-1">Denominator</div>
+				<div class="col-1">@Model.Denominator</div>
+				<div class="col-11">
+
+					<div class="card card-body">
+						@foreach (var p in Model.DPatients)
+						{
+							<div class="d-flex flex-row">
+								<div>MRN:</div>
+								<div class="ml-1">@p.MRN</div>
+								<div class="ml-3">Name:</div>
+								<div class="ml-1">@p.FullName</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1" title="Filter removed within 3 months of placement.">N1</div>
+				<div class="col-1">@Model.N1</div>
+				<div class="col-11">
+
+						<div class="card card-body">
+							@foreach (var p in Model.N1Patients)
+							{
+								<div class="d-flex flex-row">
+									<div>MRN:</div>
+									<div class="ml-1">@p.MRN</div>
+									<div class="ml-3">Name:</div>
+									<div class="ml-1">@p.FullName</div>
+								</div>
+							}
+						</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1" title="Documented re-assessment for the appropriateness of filter removal within 3 months of placement.">N2</div>
+				<div class="col-1">@Model.N2</div>
+				<div class="col-11">
+
+					<div class="card card-body">
+						@foreach (var p in Model.N2Patients)
+						{
+							<div class="d-flex flex-row">
+								<div>MRN:</div>
+								<div class="ml-1">@p.MRN</div>
+								<div class="ml-3">Name:</div>
+								<div class="ml-1">@p.FullName</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1" title="Documentation of at least two attempts to reach the patient to arrange a clinical re-assessment for the appropriateness of filter removal within 3 months of placement.">N3</div>
+				<div class="col-1">@Model.N3</div>
+				<div class="col-11">
+
+					<div class="card card-body">
+						@foreach (var p in Model.N3Patients)
+						{
+							<div class="d-flex flex-row">
+								<div>MRN:</div>
+								<div class="ml-1">@p.MRN</div>
+								<div class="ml-3">Name:</div>
+								<div class="ml-1">@p.FullName</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1" title="Everyone else.">N4</div>
+				<div class="col-1">@Model.N4</div>
+				<div class="col-11">
+
+					<div class="card card-body">
+						@foreach (var p in Model.N4Patients)
+						{
+							<div class="d-flex flex-row">
+								<div>MRN:</div>
+								<div class="ml-1">@p.MRN</div>
+								<div class="ml-3">Name:</div>
+								<div class="ml-1">@p.FullName</div>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		}
+
+
+	}
+</div>
+
+
+

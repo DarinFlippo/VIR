@@ -1,0 +1,57 @@
+﻿@model FilterTracker.Models.DisplayCaseHistoryViewModel
+
+@{
+	ViewBag.Title = "Case History";
+}
+
+<div class="container">
+	<br />
+	<br />
+	<h2>@ViewBag.Title</h2>
+	<hr />
+
+	<div class="margin-bottom-20">
+		@Html.ActionLink("Back to Patient Filter", "PatientDetails", new { id = Model.PatientFilter.PatientId })
+	</div>
+
+	@foreach (var task in Model.PatientFilter.Tasks)
+	{
+		<div class="row mb-3" id="task-@task.Id-container">
+			@Html.Partial("_CaseHistoryTaskViewer", task)
+		</div>
+	}
+
+	@if (Model.NonTaskedContactAttempts.Any())
+	{
+		<div class="row">
+			<div class="col-12 card">
+				<div class="card-header">
+					Ad-Hoc Contacts
+				</div>
+				<div class="ml-2 mt-1 p-2">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Result</th>
+								<th>Timestamp</th>
+								<th>Tracking Number</th>
+								<th>Notes</th>
+							</tr>
+						</thead>
+						@foreach (var item in Model.NonTaskedContactAttempts)
+						{
+							<tr>
+								<td class="text-nowrap text-left text-white-50">@item.ContactType.Name</td>
+								<td class="text-nowrap text-left text-white-50">@item.ResultCode.ResultCode</td>
+								<td class="text-nowrap text-left text-white-50">@item.Timestamp</td>
+								<td class="text-nowrap text-left text-white-50">@item.TrackingNumber</td>
+								<td class="text-left text-white-50">@item.Notes</td>
+							</tr>
+						}
+					</table>
+				</div>
+			</div>
+		</div>
+	}
+</div>

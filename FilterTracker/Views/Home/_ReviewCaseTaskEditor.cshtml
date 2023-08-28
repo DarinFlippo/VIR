@@ -1,0 +1,309 @@
+﻿@model FilterTracker.Models.ReviewCaseTaskEditorViewModel
+
+<!--
+
+IR doc Role
+	1.	Review Case task a. After the coordinator has performed the necessary steps, build the customer record,
+		build the case (adding survey and PDFs), and reviewing the PCP preferences, the case is ready for review.
+
+		b. The IR doc will look at all of the info, and indicate one of three things.
+			(1) To Schedule removal (means the doc is comfortable with all that has been reviewed and the next step is to schedule removal of the filter with the patient).
+			(2) To reassess the case in X days (means to push next contact with patient out by that number of days, collect more info from patient and then mark for IR doc review again).
+			(3) To have coordinator contact the PCP (means the IR doc saw something that he wants to confirm with the PCP doc).
+			(4) To make the filter permanent.
+
+			For case 1, create a Schedule Removal task for the coordinator.
+			For case 2, update a review date but don’t create any tasks.
+			For Case 3, update a review date and create a contact PCP Task for the coordinator.
+			For Case 4, update patient filter IsPermanent flag, mark PatientFilter obj inactive?
+
+			After the doc has chosen any of these, the task is complete.
+-->
+
+<div class="container">
+	<div class="card text-white bg-dark" style="font-size: 0.8em;">
+		<div class="card-body">
+			<div class="container">
+				<div class="row row-cols-4">
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Name</span>
+							<span class="text-white text-left">@Model.Patient.FullName</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">MRN</span>
+							<span class="text-white text-left">@Model.Patient.MRN</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Birthdate</span>
+							<span class="text-white text-left">@Model.Patient.DateOfBirth.ToShortDateString()</span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<span class="text-white-50 text-right">Gender</span>
+							@if (Model.Patient.Gender.HasValue)
+							{
+								if (Model.Patient.Gender.Value == 1)
+								{
+									<span class="text-white text-left">Male</span>
+								}
+								else
+								{
+									<span class="text-white text-left">Female</span>
+								}
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row row-cols-2">
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">Primary Phone Number</span>
+						<span class="text-white text-left">@Model.Patient.PrimaryPhoneNumber</span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">Primary Email</span>
+						<span class="text-white text-left">@Model.Patient.PrimaryEmailAddress</span>
+					</div>
+				</div>
+			</div>
+			<div class="row row-cols-2">
+				<div class="col-2 text-white text-left">
+					<span class="text-white-50">@Html.ActionLink("Case History", "DisplayCaseHistory", new { patientFilterId = Model.PatientFilter.Id }, new { target = "_blank" })</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<br />
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link active" id="patient-survey-tab" data-toggle="pill" href="#patient-survey" role="tab" aria-controls="patient-survey" aria-selected="true">Patient Survey</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="physician-survey-tab" data-toggle="pill" href="#physician-survey" role="tab" aria-controls="physician-survey" aria-selected="false">Physician Survey</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="contact-tab" data-toggle="pill" href="#contacts" role="tab" aria-controls="contacts" aria-selected="false">Contacts</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="attachments-tab" data-toggle="pill" href="#attachments" role="tab" aria-controls="attachments" aria-selected="false">Attachments</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="results-tab" data-toggle="pill" href="#results" role="tab" aria-controls="results" aria-selected="false">Plan</a>
+	</li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+	<div class="tab-pane fade show active" id="patient-survey" role="tabpanel" aria-labelledby="patient-survey-tab">
+		<hr />
+		@foreach (var item in Model.PatientQuestions)
+		{
+			<p>@item.Question</p>
+			<p>
+				@{
+					string response = "";
+					var pqr = Model.PatientQuestionResponses.SingleOrDefault(sd => sd.QuestionId == item.Id);
+					if (pqr != null)
+					{
+						response = pqr.Response;
+					}
+				}
+				<textarea class="form-control question-response-patient" data-question-id="@item.Id">@response</textarea>
+			</p>
+		}
+	</div>
+
+	<div class="tab-pane fade" id="physician-survey" role="tabpanel" aria-labelledby="physician-survey-tab">
+		<hr />
+		@foreach (var item in Model.PhysicianQuestions)
+		{
+			<p>@item.Question</p>
+			<p>
+				@{
+					string response = "";
+					var pqr = Model.PhysicianQuestionResponses.SingleOrDefault(sd => sd.QuestionId == item.Id);
+					if (pqr != null)
+					{
+						response = pqr.Response;
+					}
+				}
+				<textarea class="form-control question-response-physician" data-question-id="@item.Id">@response</textarea>
+			</p>
+		}
+	</div>
+
+
+	<div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+		<hr />
+		<table id="contacts-table" class="table table-sm" style="width: 100%;">
+			<thead>
+				<tr>
+					<th class="cell-header">Type</th>
+					<th class="cell-header">Date</th>
+					<th class="cell-header">Method</th>
+					<th class="cell-header">Result</th>
+					<th class="cell-header">Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.PatientContactAttempts)
+				{
+					<tr>
+						<td class="">Patient</td>
+						<td class="">@item.Timestamp.ToShortDateString()</td>
+						<td class="">@item.ContactType.Name</td>
+						<td class="">@item.ContactResultCode.ResultCode</td>
+						<td class="">@item.Notes</td>
+					</tr>
+				}
+
+				@foreach (var item in Model.PhysicianContactAttempts)
+				{
+					<tr>
+						<td class="">Physician</td>
+						<td class="">@item.Timestamp.ToShortDateString()</td>
+						<td class="">@item.ContactType.Name</td>
+						<td class="">@item.ContactResultCode.ResultCode</td>
+						<td class="">@item.Notes</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+
+	<div class="tab-pane fade" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
+		<table id="attachments-table" class="table" style="font-size: 0.9em">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Uploaded</th>
+					<th>Size</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (!Model.TaskAttachments.Any())
+				{
+					<tr>
+						<td align="center">No attachments were found.</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				}
+				else
+				{
+					foreach (var item in Model.TaskAttachments)
+					{
+						<tr id="task-attachment-@item.Id">
+							<td align="left">@item.Filename</td>
+							<td align="left">@item.DateUploaded</td>
+							<td align="left">@item.Size</td>
+							<td>
+								<a href="#" onclick="window.open('/Home/DownloadFile?id=@item.Id', '_blank');" style="font-size: 0.9em">Download</a>&nbsp;|&nbsp;
+								<a href="#" onclick="DeleteAttachment(@item.Id);" style="font-size: 0.9em">Delete</a>
+							</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="results-tab">
+		@Html.HiddenFor(m => m.PCPRemovalApprovalRequired, new { id = "pcp-removal-approval-required" })
+		@Html.HiddenFor(m => m.HavePCPRemovalApproval, new { id = "have-pcp-removal-approval" })
+		<div class="container">
+			<div class="row mt-4">
+				<div class="col-12">
+					<span><input type="radio" name="Action" id="rdo-action-sr" value="ScheduleRemoval" /></span>
+					<span><label for="rdo-action-sr">Schedule Removal/Clinic</label></span>
+					<input type="text" id="sr-note" name="ScheduleRemovalNote" maxlength="1000" disabled="disabled" placeholder="Notes" class="form-control ml-2" style="display: inline !important; line-height: 1.0 !important; width: 500px;" />
+					<br/>
+					@if (Model.PCPRemovalApprovalRequired && !Model.HavePCPRemovalApproval)
+					{
+						<span class="ml-4">
+							<input type="checkbox" name="PCPRemovalApprovalOverride" id="chk-override" disabled="disabled" />
+							<label for="chk-override" style="font-size: 0.9em">Override PCP Approval Requirement</label>
+						</span>
+					}
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-12">
+					<span>
+						<input type="radio" name="Action" id="rdo-action-ra" value="Reassess" />
+						<label for="rdo-action-ra">Reassess In (days)</label>
+						<input type="text" id="reassess-days" name="ReassessDays" maxlength="3" placeholder="@Model.ReassessDays" disabled="disabled" class="form-control ml-2" style="display: inline !important; line-height: 1.0 !important; width: 100px;" />
+					</span>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-12">
+					<input type="radio" name="Action" id="rdo-action-cpcp" value="ContactPCP" />
+					<label for="rdo-action-cpcp">Contact PCP</label>
+					<input type="text" id="pcp-note" name="ContactReason" maxlength="1000" disabled="disabled" placeholder="Notes" class="form-control ml-2" style="display: inline !important; line-height: 1.0 !important; width: 500px;" />
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-12">
+					<input type="radio" name="Action" id="rdo-action-perm" value="MakePermanent" />
+					<label for="rdo-action-perm">Make Filter Permanent</label>
+					<input type="text" id="perm-note" name="MakePermanentNote" maxlength="1000" disabled="disabled" placeholder="Notes" class="form-control ml-2" style="display: inline !important; line-height: 1.0 !important; width: 500px;" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$('#rdo-action-sr').click(function () {
+		$('#sr-note').removeAttr('disabled').focus();
+		$('#chk-override').removeAttr('disabled');
+		$('#reassess-days').attr('disabled', 'disabled');
+		$('#pcp-note').attr('disabled', 'disabled');
+		$('#perm-note').attr('disabled', 'disabled');
+	});
+
+	$('#rdo-action-ra').click(function () {
+		$('#sr-note').attr('disabled', 'disabled');
+		$('#chk-override').attr('disabled', 'disabled');
+		$('#reassess-days').removeAttr('disabled').focus();
+		$('#pcp-note').attr('disabled', 'disabled');
+		$('#perm-note').attr('disabled', 'disabled');
+	});
+
+	$('#rdo-action-cpcp').click(function () {
+		$('#sr-note').attr('disabled', 'disabled');
+		$('#chk-override').attr('disabled', 'disabled');
+		$('#reassess-days').attr('disabled', 'disabled');
+		$('#pcp-note').removeAttr('disabled').focus();
+		$('#perm-note').attr('disabled', 'disabled');
+
+	});
+
+	$('#rdo-action-perm').click(function () {
+		$('#sr-note').attr('disabled', 'disabled');
+		$('#chk-override').attr('disabled', 'disabled');
+		$('#reassess-days').attr('disabled', 'disabled');
+		$('#pcp-note').attr('disabled', 'disabled');
+		$('#perm-note').removeAttr('disabled').focus();
+
+	});
+</script>
+
+
+
+

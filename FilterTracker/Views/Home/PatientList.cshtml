@@ -1,0 +1,119 @@
+﻿@model FilterTracker.Models.PatientListModel
+@{
+	ViewBag.Title = "Patient List";
+}
+
+
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<p>
+	@Html.ActionLink("Create New", "CreatePatient")
+</p>
+@using (Html.BeginForm("PatientList", "Home", FormMethod.Get, new { name = "PatientListForm" }))
+{
+	<div class="spinner-grow text-success" id="loading-spinner" style="width: 100%; height: 100%; z-index: 0" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+	<br />
+	<table class="table table-striped" style="visibility: hidden;" id="patient-list">
+		<thead>
+			<tr>
+				<th>MRN</th>
+				<th>Name</th>
+				<th>Birthdate</th>
+				<th>Gender</th>
+				<th>Primary Email</th>
+				<th>Primary Phone</th>
+				<th>Placement Date</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (FilterTracker.Models.Patient item in Model.Patients)
+			{
+				<tr>
+					<td>@item.MRN</td>
+					<td><span class="patient-name">@item.FirstName&nbsp;@item.LastName</span></td>
+					<td><span class="patient-birthdate">@item.DateOfBirth.ToShortDateString()</span></td>
+					@if (item.Gender.HasValue && item.Gender.Value == 1)
+					{
+						<td>Male</td>
+					}
+					else if (item.Gender.HasValue && item.Gender.Value == 0)
+					{
+						<td>Female</td>
+					}
+					else
+					{
+						<td>&nbsp;</td>
+					}
+					<td>@item.PrimaryEmailAddress</td>
+					<td>@item.PrimaryPhoneNumber</td>
+					@{
+						string pd = "";
+						string foo = "";
+						if (item.PatientFilters != null && item.PatientFilters.Count() > 0)
+						{
+							var dated = item.PatientFilters.Where(w => w.ProcedureDate != null);
+							if (dated.Any())
+							{
+								DateTime procdate = dated.OrderByDescending(o => o.ProcedureDate).First().ProcedureDate.Value;
+								pd = procdate.ToShortDateString();
+								foo = $"{procdate.Year}-{procdate.Month.ToString("D2")}-{procdate.Day.ToString("D2")}";
+							}
+						<td data-order="@foo">@pd</td>
+						}
+						else
+						{
+							<td data-order="">&nbsp;</td>
+						}
+					}
+					<td>@Html.ActionLink("Edit", "EditPatient", new { id = item.Id })&nbsp;|&nbsp;@Html.ActionLink("Manage Filters/Interactions", "PatientDetails", new { id = item.Id })</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@section css{
+	<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+}
+
+@section  scripts{
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/dataTables.buttons.min.js"></script>
+	<script src="~/Scripts/buttons.flash.min.js"></script>
+	<script src="~/Scripts/jszip.min.js"></script>
+	<script src="~/Scripts/pdfmake.min.js"></script>
+	<script src="~/Scripts/vfs_fonts.js"></script>
+	<script src="~/Scripts/buttons.html5.min.js"></script>
+	<script src="~/Scripts/buttons.print.min.js"></script>
+	<script src="~/Scripts/dataTables.1.10.21.bootstrap4.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$("#loading-spinner").show('fast');
+
+			var table = $('#patient-list').DataTable({
+				"pagingType": "first_last_numbers",
+				responsive: true,
+				dom: 'Bfrtip',
+				buttons: [
+					'copy', 'csv', 'excel', 'pdf', 'print'
+				]
+			});
+
+			var info = table.page.info();
+			if (info.pages <= 1) {
+				$("#patient-list_paginate").hide('fast');
+			}
+			$("#loading-spinner").hide('fast');
+			$("#patient-list").css("visibility", "visible");
+
+		});
+	</script>
+}

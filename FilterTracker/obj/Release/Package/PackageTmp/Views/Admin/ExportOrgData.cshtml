@@ -1,0 +1,46 @@
+﻿@model FilterTracker.Models.ExportOrgDataModel
+
+@{
+	ViewBag.Title = "ExportOrgData";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<h4>Export Org Data</h4>
+<br />
+<p>
+	@Html.ActionLink("Admin Home", "Index")
+</p>
+<br />
+
+
+@using (Html.BeginForm("ExportOrgData", "Admin", FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="container">
+		@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+		{
+			<div class="row">
+				<div class="col-12">
+					<div class="card bg-warning" style="margin: 0px auto; width: 300px;">
+						<div class="card-body">
+							@Model.ErrorMessage
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+		<div class="row">
+			<div class="col-2 pull-right" style="font-weight: bold">Select an organization</div>
+			<div class="col-4" style="margin-left: 5px;">
+				@Html.DropDownListFor(m => m.SelectedOrganizationId, Model.Organizations, new { @class = "form-control" })
+			</div>
+			<div class="col-3 pull-left" style="margin-left: 10px;">
+				<button class="btn btn-primary" type="submit" value="Export">Export</button>
+			</div>
+		</div>
+	</div>
+}
+

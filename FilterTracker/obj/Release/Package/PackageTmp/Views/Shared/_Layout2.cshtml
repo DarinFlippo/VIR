@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Filter Tracker</title>
+	@Styles.Render("~/Content/css")
+	<style>
+		html {
+			position: relative;
+			min-height: 100%;
+		}
+
+		body {
+			margin-bottom: 60px; /* Margin bottom by footer height */
+		}
+
+		.footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 60px; /* Set the fixed height of the footer here */
+			line-height: 60px; /* Vertically center the text there */
+			background-color: #f5f5f5;
+		}
+
+		.search-box {
+			color: #555555;
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+			-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+			width: 150px;
+		}
+	</style>
+	<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+	@Scripts.Render("~/bundles/modernizr")
+	@RenderSection("css", required: false)
+	@RenderSection("partials_css", required: false)
+</head>
+<body>
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="border-bottom: 1px solid #808080">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav" style="width: 100%;">
+				<div style="width: 100px; margin:0px;">
+					<div style="width: 24px; margin-left: 40px;">
+						<img src="~/Content/images/ft-logo-trans-25.png" class="navbar-brand" />
+					</div>
+					<div style="width: 100%; margin: 0px auto; margin-top: 0px !important; margin-bottom: 0px !important; padding-top: 0px !important; padding-bottom: 0px !important; line-height: 1.0;">
+						<img src="~/Content/images/ft-trans-100.png" />
+					</div>
+				</div>
+				<a href="/Home/Dashboard" class="nav-item nav-link">Dashboard <span class="sr-only">(current)</span></a>
+				<a href="/Home/PatientList" class="nav-item nav-link text-center">Patient<br/>List</a>
+				<a href="/Home/CreatePatient" class="nav-item nav-link text-center">Create<br />Patient</a>
+				@if (User.IsInRole("SuperUsers"))
+				{
+				<a href="/Admin/Index" class="nav-item nav-link">Admin Menu</a>
+				}
+				@if (User.IsInRole("OrganizationAdmins"))
+				{
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+						<div class="dropdown-menu">
+							<a href="/Admin/UserList" class="dropdown-item">Users</a>
+							<a href="/Admin/PhysicianList" class="dropdown-item">Physicians</a>
+							<a href="/Home/QualityControlReport" class="dropdown-item">Quality Control Report</a>
+							<a href="/Home/PatientReconciliationReport" class="dropdown-item">Patient Reconciliation Report</a>
+							<a href="/Admin/ImportPatientData" class="dropdown-item">Import Patient Data</a>
+							<a href="/Home/FilterDwellTimeReport" class="dropdown-item">Filter Dwell Time Statistics</a>
+						</div>
+					</div>
+				}
+				<a href="https://virsystems.net/contact-us" target="_blank" class="nav-item nav-link">Contact Us</a>
+				<input type="hidden" id="selected-patient-filter-id" />
+				<div class="ui-widget" style="margin-left: 20px;">
+					<input type="text" maxlength="20" id="patient-search" class="search-box" />
+					<input type="button" onclick="redirectToContact();" class="btn-primary btn-sm" value="Log Contact" />
+				</div>
+
+				<a href="/Auth/Logout" class="nav-item nav-link text-right" style="margin-left: 20px;">Log Out</a>
+				<a href="/Auth/ChangePassword" class="nav-item nav-link text-center" style="margin-left: 20px;">Change<br />Password</a>
+			</div>
+		</div>
+	</div>
+	<div class="body-content">
+		@RenderBody()
+	</div>
+	<footer class="footer bg-dark" style="border-top: 1px solid #808080">
+		<div class="container ">
+			<div class="text-left text-muted float-left">&copy; @DateTime.Now.Year - Filter Tracker</div>
+			<div class="text-right float-right">Logged in as: @User.Identity.Name</div>
+			<div style="clear: both"></div>
+		</div>
+	</footer>
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	<script src="~/Scripts/jquery-ui.js"></script>
+	@RenderSection("scripts", required: false)
+	<script>
+		$(document).ready(function () {
+			$("#patient-search").autocomplete({
+				source: "/Home/FilterPatients",
+				//response: function (event, ui) {
+				//	alert(ui.content[0].label + "-" + ui.content[0].value);
+				//},
+				select: function (event, ui) {
+					event.preventDefault();
+					$("#selected-patient-filter-id").val(ui.item.value);
+					$("#patient-search").val(ui.item.label);
+				}
+			});
+		});
+
+		function redirectToContact() {
+			var id = $("#selected-patient-filter-id").val();
+			if (id != null && id.length > 0) {
+				document.location = "/Home/ContactPatient?patientFilterId=" + $("#selected-patient-filter-id").val();
+			} else {
+				alert("Please type a patient name or MRN in the box and make a selection.");
+			}
+		}
+	</script>
+</body>
+</html>

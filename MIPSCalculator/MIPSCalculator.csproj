@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4020874D-B2A1-4FBB-A669-A2D9BEA86454}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MIPSCalculator</RootNamespace>
+    <AssemblyName>MIPSCalculator</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.3.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\NPOI.2.5.3\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.3.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\NPOI.2.5.3\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.3.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\NPOI.2.5.3\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.3.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\FilterTracker\packages\NPOI.2.5.3\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationLog.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Attachment.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComplicatingFactor.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactResultCode.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactType.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="Filter.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FilterTrackerModel.Context.cs">
+      <DependentUpon>FilterTrackerModel.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="FilterTrackerModel.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="FilterTrackerModel.Designer.cs">
+      <DependentUpon>FilterTrackerModel.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Indication.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="LoginHistory.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MIPSHistory.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationDefault.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationFilter.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Patient.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientContactAttempt.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientFilter.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientQuestion.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientQuestionResponses.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Physician.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicianContactAttempt.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicianQuestion.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhysicianQuestionResponses.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Task.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskAttachment.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaskType.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>FilterTrackerModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FilterTrackerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilterTrackerModel.edmx</DependentUpon>
+      <LastGenOutput>FilterTrackerModel.cs</LastGenOutput>
+    </Content>
+    <None Include="App.config" />
+    <EntityDeploy Include="FilterTrackerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FilterTrackerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="FilterTrackerModel.edmx.diagram">
+      <DependentUpon>FilterTrackerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FilterTrackerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FilterTrackerModel.edmx</DependentUpon>
+      <LastGenOutput>FilterTrackerModel.Context.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\FilterTracker\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

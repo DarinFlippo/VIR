@@ -1,0 +1,1626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FilterTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ApplicationLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Exception" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Attachments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ComplicatingFactors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactResultCodes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="ResultCode" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Filters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Manufacturer" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Permanent" Type="bit" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Indications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoginHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MIPSHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="MIPS" Type="decimal" Precision="4" Scale="3" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrganizationDefaults">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="FilterAge" Type="int" />
+    <Property Name="ReassessDays" Type="int" />
+    <Property Name="ContactAttemptsBeforeRegisteredLetter" Type="int" />
+    <Property Name="PatientContactDays" Type="int" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrganizationFilters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="FiterId" Type="int" Nullable="false" />
+    <Property Name="Index" Type="int" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Organizations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="MaxUsers" Type="int" Nullable="false" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="200" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="200" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="varchar" MaxLength="2" />
+    <Property Name="Zipcode" Type="varchar" MaxLength="5" />
+    <Property Name="TimezoneOffset" Type="int" Nullable="false" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactEmail" Type="nvarchar" MaxLength="200" />
+    <Property Name="ContactPhone" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientContactAttempts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="PatientFilterId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="int" Nullable="false" />
+    <Property Name="ContactResultCodeId" Type="int" Nullable="false" />
+    <Property Name="RelatedTaskId" Type="int" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="TrackingNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientFilters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="FilterId" Type="int" />
+    <Property Name="Location" Type="nvarchar" MaxLength="500" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="IsTemporary" Type="bit" Nullable="false" />
+    <Property Name="IndicationId" Type="int" />
+    <Property Name="ComplicatingFactorId" Type="int" />
+    <Property Name="ProcedureDate" Type="date" />
+    <Property Name="TargetRemovalDate" Type="date" />
+    <Property Name="ActualRemovalDate" Type="date" />
+    <Property Name="ReassessmentDate" Type="date" />
+    <Property Name="OrderingPhysicianId" Type="int" />
+    <Property Name="PrimaryCarePhysicianId" Type="int" />
+    <Property Name="ProcedurePhysicianId" Type="int" />
+    <Property Name="MadePermanent" Type="date" />
+    <Property Name="MadePermanentBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsPCPApproved" Type="bit" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientQuestionResponses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="Response" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientQuestions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="DisplayOrderIndex" Type="int" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="MRN" Type="nvarchar" MaxLength="2000" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="200" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="200" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="nvarchar" MaxLength="2" />
+    <Property Name="Zipcode" Type="nvarchar" MaxLength="10" />
+    <Property Name="PrimaryPhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="SecondaryPhoneNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="PrimaryEmailAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="SecondaryEmailAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="DeceasedDate" Type="datetime" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhysicianContactAttempts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="PatientFilterId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="int" Nullable="false" />
+    <Property Name="ContactResultCodeId" Type="int" Nullable="false" />
+    <Property Name="RelatedTaskId" Type="int" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhysicianQuestionResponses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="Response" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhysicianQuestions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="DisplayOrderIndex" Type="int" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Physicians">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="20" />
+    <Property Name="RequiresRemovalApproval" Type="bit" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuickNotes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Heading" Type="nvarchar" MaxLength="50" />
+    <Property Name="Body" Type="nvarchar" MaxLength="2000" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Abbreviation" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskAttachments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="AttachmentId" Type="int" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskTypeId" Type="int" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="PatientFilterId" Type="int" />
+    <Property Name="AssignedUserId" Type="int" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ClosedDate" Type="date" />
+    <Property Name="TargetCloseDate" Type="date" Nullable="false" />
+    <Property Name="HideUntil" Type="datetime" />
+    <Property Name="ConsecutiveContacts" Type="int" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrganizationId" Type="int" Nullable="false" />
+    <Property Name="PasswordHash" Type="varbinary" MaxLength="500" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="LastSuccessfulLogin" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="DefaultReviewer" Type="bit" Nullable="false" />
+    <Property Name="CreateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="CreateUserId" Type="int" Nullable="false" />
+    <Property Name="UpdateTimestamp" Type="datetime" Nullable="false" />
+    <Property Name="UpdateUserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ComplicatingFactors_CreateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ComplicatingFactors" Type="Self.ComplicatingFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplicatingFactors">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplicatingFactors_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="ComplicatingFactors" Type="Self.ComplicatingFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplicatingFactors">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplicatingFactors_UpdateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ComplicatingFactors" Type="Self.ComplicatingFactors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplicatingFactors">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactResultCodes_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="ContactResultCodes" Type="Self.ContactResultCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCodes">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactResultCodes_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ContactResultCodes" Type="Self.ContactResultCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCodes">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactResultCodes_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ContactResultCodes" Type="Self.ContactResultCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactResultCodes">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="Filters" Type="Self.Filters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filters">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Filters" Type="Self.Filters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filters">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Filters_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Filters" Type="Self.Filters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Filters">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Indications_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Indications" Type="Self.Indications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indications">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Indications_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Indications" Type="Self.Indications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indications">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationDefaults_CreateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OrganizationDefaults" Type="Self.OrganizationDefaults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefaults">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationDefaults_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="OrganizationDefaults" Type="Self.OrganizationDefaults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefaults">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationDefaults_UpdateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OrganizationDefaults" Type="Self.OrganizationDefaults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationDefaults">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Filters">
+    <End Role="Filters" Type="Self.Filters" Multiplicity="1" />
+    <End Role="OrganizationFilters" Type="Self.OrganizationFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilters">
+        <PropertyRef Name="FiterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="OrganizationFilters" Type="Self.OrganizationFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilters">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OrganizationFilters" Type="Self.OrganizationFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilters">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationFilters_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OrganizationFilters" Type="Self.OrganizationFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrganizationFilters">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organizations_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organizations">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organizations_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organizations">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_ContactResultCodes">
+    <End Role="ContactResultCodes" Type="Self.ContactResultCodes" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactResultCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="ContactResultCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_ContactTypes">
+    <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_PatientFilters">
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Tasks">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="RelatedTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientContactAttempts_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PatientContactAttempts" Type="Self.PatientContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientContactAttempts">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_ComplicatingFactors">
+    <End Role="ComplicatingFactors" Type="Self.ComplicatingFactors" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ComplicatingFactors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="ComplicatingFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Filters">
+    <End Role="Filters" Type="Self.Filters" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="FilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Indications">
+    <End Role="Indications" Type="Self.Indications" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Indications">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="IndicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_OrderingPhysician">
+    <End Role="Physicians" Type="Self.Physicians" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Physicians">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="OrderingPhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Organization">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_Patient">
+    <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_PrimaryCarePhysician">
+    <End Role="Physicians" Type="Self.Physicians" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Physicians">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="PrimaryCarePhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientFilters_ProcedurePhysicians">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientFilters">
+        <PropertyRef Name="ProcedurePhysicianId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PatientQuestionResponses" Type="Self.PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_PatientQuestions">
+    <End Role="PatientQuestions" Type="Self.PatientQuestions" Multiplicity="1" />
+    <End Role="PatientQuestionResponses" Type="Self.PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientQuestions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestionResponses_Tasks">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+    <End Role="PatientQuestionResponses" Type="Self.PatientQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestionResponses">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientQuestions_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PatientQuestions" Type="Self.PatientQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientQuestions">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patients_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patients">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_ContactResultCodes">
+    <End Role="ContactResultCodes" Type="Self.ContactResultCodes" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactResultCodes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="ContactResultCodeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_ContactTypes">
+    <End Role="ContactTypes" Type="Self.ContactTypes" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_PatientFilters">
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Tasks">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="RelatedTaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Users_Create">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianContactAttempts_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="PhysicianContactAttempts" Type="Self.PhysicianContactAttempts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianContactAttempts">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="PhysicianQuestionResponses" Type="Self.PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_PhysicianQuestions">
+    <End Role="PhysicianQuestions" Type="Self.PhysicianQuestions" Multiplicity="1" />
+    <End Role="PhysicianQuestionResponses" Type="Self.PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhysicianQuestions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhysicianQuestionResponses_Tasks">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+    <End Role="PhysicianQuestionResponses" Type="Self.PhysicianQuestionResponses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicianQuestionResponses">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Physicians_CreateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Physicians" Type="Self.Physicians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physicians">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Physicians_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="Physicians" Type="Self.Physicians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physicians">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Physicians_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Physicians" Type="Self.Physicians" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Physicians">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuickNotes_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="QuickNotes" Type="Self.QuickNotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuickNotes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachment_Task">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+    <End Role="TaskAttachments" Type="Self.TaskAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachments">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachments_Attachments">
+    <End Role="Attachments" Type="Self.Attachments" Multiplicity="1" />
+    <End Role="TaskAttachments" Type="Self.TaskAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attachments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachments">
+        <PropertyRef Name="AttachmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachments_CreateUsers">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TaskAttachments" Type="Self.TaskAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachments">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskAttachments_UpdateUsers">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TaskAttachments" Type="Self.TaskAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskAttachments">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_PatientFilters">
+    <End Role="PatientFilters" Type="Self.PatientFilters" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientFilters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="PatientFilterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Patients">
+    <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_TaskTypes">
+    <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="TaskTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="AssignedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users_CreateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Users_UpdateUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypes_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskTypes">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypes_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskTypes">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypes_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskTypes">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users_CREATE">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="CreateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users_Update">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Organizations">
+    <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="OrganizationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FilterTrackerModelStoreContainer">
+    <EntitySet Name="ApplicationLog" EntityType="Self.ApplicationLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComplicatingFactors" EntityType="Self.ComplicatingFactors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactResultCodes" EntityType="Self.ContactResultCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactTypes" EntityType="Self.ContactTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Indications" EntityType="Self.Indications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginHistory" EntityType="Self.LoginHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MIPSHistory" EntityType="Self.MIPSHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationDefaults" EntityType="Self.OrganizationDefaults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrganizationFilters" EntityType="Self.OrganizationFilters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organizations" EntityType="Self.Organizations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PatientContactAttempts" EntityType="Self.PatientContactAttempts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PatientFilters" EntityType="Self.PatientFilters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PatientQuestionResponses" EntityType="Self.PatientQuestionResponses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PatientQuestions" EntityType="Self.PatientQuestions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhysicianContactAttempts" EntityType="Self.PhysicianContactAttempts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhysicianQuestionResponses" EntityType="Self.PhysicianQuestionResponses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhysicianQuestions" EntityType="Self.PhysicianQuestions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Physicians" EntityType="Self.Physicians" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuickNotes" EntityType="Self.QuickNotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskAttachments" EntityType="Self.TaskAttachments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaskTypes" EntityType="Self.TaskTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ComplicatingFactors_CreateUser" Association="Self.FK_ComplicatingFactors_CreateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ComplicatingFactors" EntitySet="ComplicatingFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplicatingFactors_Organizations" Association="Self.FK_ComplicatingFactors_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="ComplicatingFactors" EntitySet="ComplicatingFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplicatingFactors_UpdateUser" Association="Self.FK_ComplicatingFactors_UpdateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ComplicatingFactors" EntitySet="ComplicatingFactors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactResultCodes_Organizations" Association="Self.FK_ContactResultCodes_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="ContactResultCodes" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactResultCodes_Users_Create" Association="Self.FK_ContactResultCodes_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ContactResultCodes" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactResultCodes_Users_Update" Association="Self.FK_ContactResultCodes_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ContactResultCodes" EntitySet="ContactResultCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Organizations" Association="Self.FK_Filters_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Filters" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Users_Create" Association="Self.FK_Filters_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Filters" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Filters_Users_Update" Association="Self.FK_Filters_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Filters" EntitySet="Filters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Indications_Users" Association="Self.FK_Indications_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Indications" EntitySet="Indications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Indications_Users1" Association="Self.FK_Indications_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Indications" EntitySet="Indications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationDefaults_CreateUser" Association="Self.FK_OrganizationDefaults_CreateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OrganizationDefaults" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationDefaults_Organizations" Association="Self.FK_OrganizationDefaults_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="OrganizationDefaults" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationDefaults_UpdateUser" Association="Self.FK_OrganizationDefaults_UpdateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OrganizationDefaults" EntitySet="OrganizationDefaults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Filters" Association="Self.FK_OrganizationFilters_Filters">
+      <End Role="Filters" EntitySet="Filters" />
+      <End Role="OrganizationFilters" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Organizations" Association="Self.FK_OrganizationFilters_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="OrganizationFilters" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Users" Association="Self.FK_OrganizationFilters_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OrganizationFilters" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationFilters_Users_Create" Association="Self.FK_OrganizationFilters_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OrganizationFilters" EntitySet="OrganizationFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organizations_Users_Create" Association="Self.FK_Organizations_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Organizations" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organizations_Users_Update" Association="Self.FK_Organizations_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Organizations" EntitySet="Organizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_ContactResultCodes" Association="Self.FK_PatientContactAttempts_ContactResultCodes">
+      <End Role="ContactResultCodes" EntitySet="ContactResultCodes" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_ContactTypes" Association="Self.FK_PatientContactAttempts_ContactTypes">
+      <End Role="ContactTypes" EntitySet="ContactTypes" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Organizations" Association="Self.FK_PatientContactAttempts_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_PatientFilters" Association="Self.FK_PatientContactAttempts_PatientFilters">
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Tasks" Association="Self.FK_PatientContactAttempts_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Users_Create" Association="Self.FK_PatientContactAttempts_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientContactAttempts_Users_Update" Association="Self.FK_PatientContactAttempts_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PatientContactAttempts" EntitySet="PatientContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_ComplicatingFactors" Association="Self.FK_PatientFilters_ComplicatingFactors">
+      <End Role="ComplicatingFactors" EntitySet="ComplicatingFactors" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Filters" Association="Self.FK_PatientFilters_Filters">
+      <End Role="Filters" EntitySet="Filters" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Indications" Association="Self.FK_PatientFilters_Indications">
+      <End Role="Indications" EntitySet="Indications" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_OrderingPhysician" Association="Self.FK_PatientFilters_OrderingPhysician">
+      <End Role="Physicians" EntitySet="Physicians" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Organization" Association="Self.FK_PatientFilters_Organization">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_Patient" Association="Self.FK_PatientFilters_Patient">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_PrimaryCarePhysician" Association="Self.FK_PatientFilters_PrimaryCarePhysician">
+      <End Role="Physicians" EntitySet="Physicians" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientFilters_ProcedurePhysicians" Association="Self.FK_PatientFilters_ProcedurePhysicians">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_Organizations" Association="Self.FK_PatientQuestionResponses_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_PatientQuestions" Association="Self.FK_PatientQuestionResponses_PatientQuestions">
+      <End Role="PatientQuestions" EntitySet="PatientQuestions" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestionResponses_Tasks" Association="Self.FK_PatientQuestionResponses_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="PatientQuestionResponses" EntitySet="PatientQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientQuestions_Organizations" Association="Self.FK_PatientQuestions_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PatientQuestions" EntitySet="PatientQuestions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patients_Organizations" Association="Self.FK_Patients_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Patients" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_ContactResultCodes" Association="Self.FK_PhysicianContactAttempts_ContactResultCodes">
+      <End Role="ContactResultCodes" EntitySet="ContactResultCodes" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_ContactTypes" Association="Self.FK_PhysicianContactAttempts_ContactTypes">
+      <End Role="ContactTypes" EntitySet="ContactTypes" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Organizations" Association="Self.FK_PhysicianContactAttempts_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_PatientFilters" Association="Self.FK_PhysicianContactAttempts_PatientFilters">
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Tasks" Association="Self.FK_PhysicianContactAttempts_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Users_Create" Association="Self.FK_PhysicianContactAttempts_Users_Create">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianContactAttempts_Users_Update" Association="Self.FK_PhysicianContactAttempts_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PhysicianContactAttempts" EntitySet="PhysicianContactAttempts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_Organizations" Association="Self.FK_PhysicianQuestionResponses_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_PhysicianQuestions" Association="Self.FK_PhysicianQuestionResponses_PhysicianQuestions">
+      <End Role="PhysicianQuestions" EntitySet="PhysicianQuestions" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhysicianQuestionResponses_Tasks" Association="Self.FK_PhysicianQuestionResponses_Tasks">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="PhysicianQuestionResponses" EntitySet="PhysicianQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Physicians_CreateUser" Association="Self.FK_Physicians_CreateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Physicians" EntitySet="Physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Physicians_Organizations" Association="Self.FK_Physicians_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Physicians" EntitySet="Physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Physicians_Users" Association="Self.FK_Physicians_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Physicians" EntitySet="Physicians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuickNotes_Users" Association="Self.FK_QuickNotes_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="QuickNotes" EntitySet="QuickNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachment_Task" Association="Self.FK_TaskAttachment_Task">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="TaskAttachments" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachments_Attachments" Association="Self.FK_TaskAttachments_Attachments">
+      <End Role="Attachments" EntitySet="Attachments" />
+      <End Role="TaskAttachments" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachments_CreateUsers" Association="Self.FK_TaskAttachments_CreateUsers">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TaskAttachments" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskAttachments_UpdateUsers" Association="Self.FK_TaskAttachments_UpdateUsers">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TaskAttachments" EntitySet="TaskAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Organizations" Association="Self.FK_Tasks_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_PatientFilters" Association="Self.FK_Tasks_PatientFilters">
+      <End Role="PatientFilters" EntitySet="PatientFilters" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Patients" Association="Self.FK_Tasks_Patients">
+      <End Role="Patients" EntitySet="Patients" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_TaskTypes" Association="Self.FK_Tasks_TaskTypes">
+      <End Role="TaskTypes" EntitySet="TaskTypes" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users" Association="Self.FK_Tasks_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users_CreateUser" Association="Self.FK_Tasks_Users_CreateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Users_UpdateUser" Association="Self.FK_Tasks_Users_UpdateUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypes_Organizations" Association="Self.FK_TaskTypes_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="TaskTypes" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypes_Users" Association="Self.FK_TaskTypes_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TaskTypes" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypes_Users1" Association="Self.FK_TaskTypes_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TaskTypes" EntitySet="TaskTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users_CREATE" Association="Self.FK_UserRoles_Users_CREATE">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users_Update" Association="Self.FK_UserRoles_Users_Update">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Organizations" Association="Self.FK_Users_Organizations">
+      <End Role="Organizations" EntitySet="Organizations" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

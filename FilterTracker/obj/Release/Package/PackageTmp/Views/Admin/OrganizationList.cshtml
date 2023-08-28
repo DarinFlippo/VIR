@@ -1,0 +1,109 @@
+﻿@model IEnumerable<FilterTracker.Models.Organization>
+@{
+	ViewBag.Title = "Organization List";
+}
+<br />
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+<p>
+	@Html.ActionLink("Create New", "CreateOrganization") |  @Html.ActionLink("Admin Home", "Index")
+</p>
+
+<div class="spinner-grow text-success" id="loading-spinner" style="width: 100%; height: 100%; z-index: 0" role="status">
+	<span class="sr-only">Loading...</span>
+</div>
+
+<table class="table" id="orgs-table" style="display: none;">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Description)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Active)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreateTimestamp)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdateTimestamp)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Active)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreateTimestamp)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdateTimestamp)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "EditOrganization", new { id = item.Id }) |
+					@Html.ActionLink("Deactivate", "DeactivateOrganization", new { id = item.Id }) |
+					@Html.ActionLink("Delete", "DeleteOrganization", new { id = item.Id })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+@section css{
+	<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+	<link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+}
+
+@section  scripts{
+	<script src="~/Scripts/jquery.dataTables.min.js"></script>
+	<script src="~/Scripts/dataTables.buttons.min.js"></script>
+	<script src="~/Scripts/buttons.flash.min.js"></script>
+	<script src="~/Scripts/jszip.min.js"></script>
+	<script src="~/Scripts/pdfmake.min.js"></script>
+	<script src="~/Scripts/vfs_fonts.js"></script>
+	<script src="~/Scripts/buttons.html5.min.js"></script>
+	<script src="~/Scripts/buttons.print.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			try {
+				$("#loading-spinner").show('fast');
+
+				var table = $('#orgs-table').DataTable({
+					"pagingType": "first_last_numbers",
+					responsive: true,
+					dom: 'Bfrtip',
+					buttons: [
+						'excel', 'pdf', 'print'
+					]
+				});
+
+				var info = table.page.info();
+				if (info.pages <= 1) {
+					$("#orgs-table_paginate").hide('fast');
+				}
+				$("#loading-spinner").hide('fast');
+				$("#orgs-table").show('fast');
+			}
+			catch (e) {
+				alert(e);
+			}
+
+		});
+	</script>
+}

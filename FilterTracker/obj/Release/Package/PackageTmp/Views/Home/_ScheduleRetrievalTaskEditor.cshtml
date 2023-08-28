@@ -1,0 +1,95 @@
+﻿@model FilterTracker.Models.ScheduleRetrievalTaskEditorViewModel
+
+<div class="card text-white bg-dark">
+	<div class="card-body">
+		<div class="container">
+			<div class="row row-cols-4">
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">Name</span>
+						<span class="text-white text-left">@Model.Patient.FullName</span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">MRN</span>
+						<span class="text-white text-left">@Model.Patient.MRN</span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">Birthdate</span>
+						<span class="text-white text-left">@Model.Patient.DateOfBirth.ToShortDateString()</span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<span class="text-white-50 text-right">Gender</span>
+						@if (Model.Patient.Gender.HasValue)
+						{
+							if (Model.Patient.Gender.Value == 1)
+							{
+								<span class="text-white text-left">Male</span>
+							}
+							else
+							{
+								<span class="text-white text-left">Female</span>
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row row-cols-2">
+			<div class="col">
+				<div class="form-group">
+					<span class="text-white-50 text-right">Primary Phone Number</span>
+					<span class="text-white text-left">@Model.Patient.PrimaryPhoneNumber</span>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<span class="text-white-50 text-right">Primary Email</span>
+					<span class="text-white text-left">@Model.Patient.PrimaryEmailAddress</span>
+				</div>
+			</div>
+		</div>
+		<div class="row row-cols-2">
+			<div class="col-2 text-white text-left ml-3">
+				<span class="text-white-50">@Html.ActionLink("Case History", "DisplayCaseHistory", new { patientFilterId = Model.PatientFilter.Id }, new { target = "_blank" })</span>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+<div class="row row-cols-8" style="padding-top: 30px;">
+	@Html.AntiForgeryToken()
+
+	<div class="form-group col">
+		<label for="contact-type">Contact Method</label>
+		@Html.DropDownListFor(m => m.SelectedContactType, Model.ContactAttemptTypes, new { @class = "form-control margin-bottom-5", id = "contact-type" })
+		<span>@Html.ValidationMessageFor(m => m.SelectedContactType, "", new { @class = "text-danger" })</span>
+	</div>
+	<div class="form-group col">
+		<label for="result-code">Contact Result</label>
+		@Html.DropDownListFor(m => m.SelectedResultCode, Model.ResultCodeTypes, new { @class = "form-control margin-bottom-5", id = "result-code" })
+		<span>@Html.ValidationMessageFor(m => m.SelectedResultCode, "", new { @class = "text-danger" })</span>
+	</div>
+</div>
+
+<div class="row row-cols-8">
+	<div class="form-group col-12">
+		<label for="Note">Notes</label>
+		@Html.TextAreaFor(m => m.Note, new { @class = "form-control margin-bottom-5", id = "contact-note", rows = "6", cols = "500" })
+		<span>@Html.ValidationMessageFor(m => m.Note, "", new { @class = "text-danger" })</span>
+	</div>
+</div>
+
+<div class="row row-cols-12">
+	<div class="form-group col">
+		<label for="target-removal-date">Target Removal Date</label>
+		@Html.TextBoxFor(m => m.TargetRemovalDate, new { @class = "form-control margin-bottom-5", id = "target-removal-date" })
+		<span>@Html.ValidationMessageFor(m => m.TargetRemovalDate, "", new { @class = "text-danger" })</span>
+	</div>
+</div>
